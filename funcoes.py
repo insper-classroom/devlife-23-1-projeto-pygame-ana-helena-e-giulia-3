@@ -16,14 +16,6 @@ def desenha(window, fundo, harry):
     window.blit(fundo, (0, 0))
     harry.desenha(window)
     pygame.display.update()
- 
-def detecta_movimento(jogador):
-    chaves = pygame.key.get_pressed()
-    jogador.x_vel = 0
-    if chaves[pygame.K_LEFT]:
-        jogador.movimenta_esquerda(VEL_JOGADOR)
-    if chaves[pygame.K_RIGHT]:
-        jogador.movimenta_direita(VEL_JOGADOR)
 
 def main(window):
     clock = pygame.time.Clock()
@@ -36,11 +28,22 @@ def main(window):
 
             if event.type == pygame.QUIT:
                 jogo = False
-                break  
+                break 
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT: 
+                    harry.movimenta_esquerda(VEL_JOGADOR)
+                if event.key == pygame.K_RIGHT: 
+                    harry.movimenta_direita(VEL_JOGADOR)
+        
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    harry.movimenta_esquerda(0)
+                if event.key == pygame.K_RIGHT:
+                    harry.movimenta_direita(0) 
             
-            harry.loop(FPS)
-            detecta_movimento(harry)
-            desenha(window, gera_fundo(), harry)
+        harry.loop(FPS)
+        desenha(window, gera_fundo(), harry)
 
 if __name__ == '__main__':
     main(window)
