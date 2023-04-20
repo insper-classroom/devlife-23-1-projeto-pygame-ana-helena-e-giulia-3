@@ -17,15 +17,12 @@ body {
     background-size: cover;
     background-position: top;
     background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 h1 {
     font-family:'wizarding world';
-    color: rgb(196, 165, 103);
+    margin-top: 20%;
+    color: rgb(211, 177, 110);
     font-size: 100px;
     text-align: center;
     display: flex;
@@ -34,22 +31,18 @@ h1 {
     margin-bottom: 1%;
 }
 
-h3 {
+h2 {
     font-family:'Times New Roman', Times, serif;
-    color: rgb(211, 170, 88);
+    color: rgb(174, 139, 71);
     font-size: 24px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 500px;
-    margin-bottom: 2%;
 }
 
-p {
+h3 {
     font-family:'Times New Roman', Times, serif;
-    color: #ffffff;
-    font-size: 24zypx;
+    text-decoration: underline;
+    color: rgb(230, 201, 143);
+    font-size: 15px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -58,14 +51,68 @@ p {
     margin-bottom: 1%;
 }
 
+.saiba_mais{
+    color: white;
+    font-size: 15px;
+}
+
 .imagem-container {
+    margin-top: 90px;
     display: flex;
-    flex-direction: row; /* alinha as imagens horizontalmente */
-    justify-content: center; /* centraliza as imagens no eixo X */
-    align-items: center; /* centraliza as imagens no eixo Y */
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
   }
   
   .imagem-container img {
     width: 400px;
-    margin-right: 50px; /* adiciona uma margem entre as imagens */
+    margin-right: 50px; 
+    margin-bottom: 2%;
+  }
+  
+  .log{
+    font-family:'Times New Roman', Times, serif;
+    color: white;
+    font-size: 40px;
+    margin-top:3%;
+  }
+
+  .header{
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header_description{
+    margin-bottom: 2%;
+    padding-left: 33%;
+  }
+
+  .header_description {
+    text-align: center;
+  }
+
+  .header_saiba_mais{
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    color: white;
+  }
+  
+  td, th {
+    border: 1px solid white;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  .tabela_log{
+    margin-top: 50px;
   }
