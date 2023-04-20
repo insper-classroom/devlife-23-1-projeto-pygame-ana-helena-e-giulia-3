@@ -7,7 +7,14 @@
     </head>
     <body>
         <div>
-            <div class="header">
+            <div class="menu">
+                <a href="#sobre">Sobre nós</a>
+                <a href="#info">Info</a>
+                <a href="#desenvolvimento">Desenvolvimento</a>
+                <a class="active" href="#jogo">Início</a>
+            </div>
+
+            <div class="header" id="jogo">
                 <h1>
                     Hogwarts Escape
                 </h1>
@@ -27,7 +34,7 @@
                 </div>
             </div>
             
-            <div class="log_desenvolvimento">
+            <div class="log_desenvolvimento" id="desenvolvimento">
                 <h2 class="log">
                     Log de desenvolvimento
                 </h2>
@@ -38,22 +45,71 @@
                         <td>Definição</td>
                     </tr>
                     <tr>
-                        <td>Ted</td>
-                        <td>22</td>
-                        <td>Estudante</td>
+                        <td>18/04</td>
+                        <td>Ana Helena e Giulia Vallente</td>
+                        <td>Definição do jogo e brainstorming</td>
                     </tr>
                     <tr>
-                        <td>Ralf</td>
-                        <td>26</td>
-                        <td>Designer</td>
+                        <td>19/04</td>
+                        <td>Ana Helena</td>
+                        <td>Desenvolvimento do site</td>
+                    </tr>
+                    <tr>
+                        <td>19/04</td>
+                        <td>Giulia Vallente</td>
+                        <td>Desing dos personagens e começo do jogo</td>
                     </tr>
                 </table> 
             </div>
 
             <div>
-                <h2 class="log">Informações adicionais </h2>
+                <h2 class="log" id="info">Informações adicionais</h2>
+                <div>
+                    <h2 class="instrucoes_jogo">
+                        ❥ Como executar o jogo
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ Instalar o VS Code
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ Necessário ter o Python 3 instalado no computador 
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ Baixar o zip do jogo (clique no saiba mais)
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ Para instalar, digite no terminal pip install pygame
+                    </h2>
+                </div>
+                <div>
+                    <h2 class="instrucoes_jogo">
+                        ❥ Como jogar
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ Use 'aswd' para movimentar Draco Malfoy
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ Use as setas para movimentar Harry Potter
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ Colete as horcrux para ganhar pontos e conseguir escapar da sala!
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ O objetivo do jogo é salvar Harry Potter e Draco Malfoy da Malfoy Manor
+                    </h2>
+                    <h2 class="como_executar">
+                        ↬ Se Draco Malfoy cair no líquido vermelho, ele morre, assim como Harry Potter morre ao cair no líquido azul
+                    </h2>
+                </div>
             </div>
 
+            <div class="about">
+                <h2 class="log" id="sobre">Sobre nós</h2>
+                <div class="img-container">
+                    <img src="img/imagem_teste.png" alt="Imagem">
+                    <img src="img/imagem_teste.png" alt="Imagem">
+                </div>
+            </div>
         </div>
     </body>
     </html>

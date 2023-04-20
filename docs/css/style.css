@@ -34,7 +34,7 @@ h1 {
 h2 {
     font-family:'Times New Roman', Times, serif;
     color: rgb(174, 139, 71);
-    font-size: 24px;
+    font-size: 30px;
     width: 500px;
 }
 
@@ -51,8 +51,27 @@ h3 {
     margin-bottom: 1%;
 }
 
+.menu{
+  overflow: hidden;
+  background-color: black;
+}
+
+.menu a {
+  float: right;
+  color: rgb(211, 177, 110);
+  text-align: center;
+  padding: 30px 30px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.menu a:hover {
+  background-color: rgb(211, 177, 110);
+  color: black;
+}
+
 .saiba_mais{
-    color: white;
+    color: rgb(214, 196, 137);
     font-size: 15px;
 }
 
@@ -71,10 +90,11 @@ h3 {
   }
   
   .log{
-    font-family:'Times New Roman', Times, serif;
-    color: white;
-    font-size: 40px;
-    margin-top:3%;
+    font-family:'wizarding world';
+    color: rgb(211, 177, 110);
+    font-size: 50px;
+    margin-top: 3%;
+    white-space: nowrap;
   }
 
   .header{
@@ -84,11 +104,11 @@ h3 {
 
   .header_description{
     margin-bottom: 2%;
-    padding-left: 33%;
-  }
-
-  .header_description {
+    justify-content: center;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .header_saiba_mais{
@@ -98,14 +118,15 @@ h3 {
 
   table {
     border-collapse: collapse;
-    width: 100%;
-    color: white;
+    width: 95%;
+    color: rgb(240, 229, 198);
   }
   
   td, th {
-    border: 1px solid white;
+    border: 2px solid rgb(174, 139, 71);
     padding: 8px;
     text-align: left;
+    font-size: 30px;
   }
   
   th {
@@ -115,4 +136,34 @@ h3 {
 
   .tabela_log{
     margin-top: 50px;
+  }
+
+  .instrucoes_jogo{
+    color: rgb(221, 205, 160);
+    font-size: 35px;
+    margin-bottom: 3px;
+  }
+
+  .como_executar{
+    color: rgb(240, 229, 198);
+    font-size: 20px;
+    padding-left: 40px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+
+  .img_container{
+    margin-top: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left; 
+    align-items: center;
+  }
+
+  .img-container img {
+    width: 400px;
+    margin-right: 50px; 
+    margin-bottom: 2%;
+    padding-left: 15px;
+    margin-top: 20px;
   }
