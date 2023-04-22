@@ -1,8 +1,10 @@
 import pygame
+import funcoes
 
 class Personagens(pygame.sprite.Sprite):
     COLOR = (255, 0, 0)
     GRAVIDADE = 1
+    SPRITE = funcoes.carrega_sprite(32, 32, True)
 
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
@@ -29,13 +31,14 @@ class Personagens(pygame.sprite.Sprite):
             self.animation_count = 0
     
     def loop(self, fps):
-        self.y_vel += min(1, (self.tempo_queda / fps) * self.GRAVIDADE)
+        # self.y_vel += min(1, (self.tempo_queda / fps) * self.GRAVIDADE)
         self.movimenta(self.x_vel, self.y_vel)
 
         self.tempo_queda += 1
     
     def desenha(self, window):
-        pygame.draw.rect(window, self.COLOR, self.rect)
+        self.sprite = self.SPRITE['harry_lado_' + self.direcao][0]
+        window.blit(self.sprite, (self.rect.x, self.rect.y))
 
     
 
