@@ -6,12 +6,17 @@ def inicializa():
     pygame.display.set_caption("Hogwarts Scape")
     window = pygame.display.set_mode((1280, 720))
 
-    assets = {}
+    assets = {
+        'musica_fundo': pygame.mixer.music.load('som/musica_tema.mp3')
+    }
+    
     state = {
         'tela_inicio': True,
         'tela_instrucoes': False,
         'tela_jogo': False
     }
+
+    pygame.mixer.music.play()
 
     return window, assets, state
 
