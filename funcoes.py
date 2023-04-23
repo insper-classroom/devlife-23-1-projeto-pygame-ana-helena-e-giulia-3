@@ -44,7 +44,7 @@ def inverte(sprites):
     return [pygame.transform.flip(sprite, True, False) for sprite in sprites]
 
 
-def carrega_sprite(direcao=False):
+def upload_harry(direcao=False):
     todas_sprites = {}
     sprites = []
     sprite = pygame.image.load('imagens/harry_lado.png')
@@ -61,9 +61,39 @@ def carrega_sprite(direcao=False):
 
 
 def carrega_bloco():
-    imagem = (pygame.transform.scale(pygame.image.load('imagens/terreno.jpg'), (72, 72)))
-    return imagem
-               
+    imagem = (pygame.transform.scale(pygame.image.load('imagens/terreno.jpg'), (80, 80)))
+    return imagem    
+
+def colisao_vertical(harry, objetos, y_vel):
+    objetos_colididos = []
+    for objeto in objetos:
+        if pygame.sprite.collide_mask(harry, objeto):
+            if y_vel > 0:
+                harry.rect.bottom = objeto.rect.top
+                harry.atingiu_chao()
+            if y_vel < 0:
+                harry.rect.top = objeto.rect.bottom
+                harry.bateu_cabeca()
+        objetos_colididos.append(objeto)
+    
+    return objetos_colididos
+
+def colisao_horizontal(harry, objetos, dx):
+    harry.movimenta(dx, 0)
+    harry.update()
+    objeto_colidido = None
+    for objeto in objetos:
+        if pygame.sprite.collide_mask(harry, objeto):
+            objeto_colidido = objeto
+            break
+    
+    harry.movimenta(-dx, 0)
+    harry.update()
+    return objeto_colidido
+
+
+
+
 
 def desenha(window, background, bg_image, harry, objetos, state):
     window.fill((0, 0, 0))
@@ -174,7 +204,7 @@ def desenha(window, background, bg_image, harry, objetos, state):
     if state['tela_jogo']:
         for tile in background:
             window.blit(bg_image, tile)
-
+        
         for objeto in objetos:
             objeto.desenha(window)
 
@@ -187,8 +217,23 @@ def main(window, assets, state):
     clock = pygame.time.Clock()
     background, bg_image = gera_fundo()
     harry = classes.Personagens(100, 100, 50, 50)
-    tamanho_bloco = 72
-    chao = [classes.Bloco(i * tamanho_bloco, 720 * tamanho_bloco, tamanho_bloco) for i in range(-1280 // tamanho_bloco, 1280 * 2 // tamanho_bloco)]
+    tamanho_bloco = 80
+    lista_objetos = []
+    for i in range(16):
+        chao = classes.Bloco(i * tamanho_bloco, 640, tamanho_bloco)
+        lista_objetos.append(chao)
+    for i in range(16):
+        teto = classes.Bloco(i * tamanho_bloco, 0, tamanho_bloco)
+        lista_objetos.append(teto)
+    for i in range(9):
+        parede_esquerda = classes.Bloco(0, i * tamanho_bloco, tamanho_bloco)
+        lista_objetos.append(parede_esquerda)
+    for i in range(9):
+        parede_direita = classes.Bloco(1200, i * tamanho_bloco, tamanho_bloco)
+        lista_objetos.append(parede_direita)
+    
+    colisao_esquerda = colisao_horizontal(harry, lista_objetos, -VEL_JOGADOR)
+    colisao_direita = colisao_horizontal(harry, lista_objetos, VEL_JOGADOR)
     jogo = True
     while jogo: 
         clock.tick(FPS)
@@ -199,10 +244,12 @@ def main(window, assets, state):
                 break 
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT: 
+                if event.key == pygame.K_LEFT and not colisao_esquerda: 
                     harry.movimenta_esquerda(VEL_JOGADOR)
-                if event.key == pygame.K_RIGHT: 
+                if event.key == pygame.K_RIGHT and not colisao_direita: 
                     harry.movimenta_direita(VEL_JOGADOR)
+                if event.key == pygame.K_UP:
+                    harry.pulo()
         
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
@@ -212,9 +259,10 @@ def main(window, assets, state):
 
         if state['tela_jogo']:
             harry.loop(FPS)
-            desenha(window, background, bg_image, harry, chao, state)
+            colisao_vertical(harry, lista_objetos, harry.y_vel)
+            desenha(window, background, bg_image, harry, lista_objetos, state)
         else:
-            desenha(window, background, bg_image, harry, chao, state)
+            desenha(window, background, bg_image, harry, lista_objetos, state)
 
 
 if __name__ == '__main__':
