@@ -3,9 +3,8 @@ import funcoes
 
 class Personagens(pygame.sprite.Sprite):
     GRAVIDADE = 1
-    SPRITE = funcoes.upload_harry(True)
+    SPRITE = funcoes.upload_sprite_sheets(32, 32, True)
     ANIMATION_DELAY = 3
-    # SPRITE = funcoes.upload_draco(True)
 
     def __init__(self, x, y, width, height):
         super().__init__()
@@ -51,8 +50,16 @@ class Personagens(pygame.sprite.Sprite):
         self.y_vel *= -1
     
     def update_sprite(self):
+        sprite_sheet = "harry_frente"
+        if self.y_vel != 0 and self.x_vel != 0:
+            sprite_sheet = "harry_lado"
 
-        self.sprite = self.SPRITE['harry_lado_' + self.direcao][0]
+        sprite_sheet_name = sprite_sheet + "_" + self.direction
+        sprites = self.SPRITES[sprite_sheet_name]
+        sprite_index = (self.animation_count //
+                        self.ANIMATION_DELAY) % len(sprites)
+        self.sprite = sprites[sprite_index]
+        self.animation_count += 1
         self.update()
 
     def update(self):
@@ -65,13 +72,10 @@ class Personagens(pygame.sprite.Sprite):
 
         self.tempo_queda += 1
         self.update_sprite()
-
     
     def desenha(self, window):
-        self.sprite = self.SPRITE['harry_lado_' + self.direcao][0]
         window.blit(self.sprite, (self.rect.x, self.rect.y))
 
-    
 
 
 class Objetos(pygame.sprite.Sprite):

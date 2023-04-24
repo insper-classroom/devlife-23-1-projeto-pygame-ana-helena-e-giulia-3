@@ -1,5 +1,7 @@
 import pygame
 import classes
+from os import listdir
+from os.path import isfile, join
 
 def inicializa():
     pygame.init()
@@ -44,20 +46,29 @@ def inverte(sprites):
     return [pygame.transform.flip(sprite, True, False) for sprite in sprites]
 
 
-def upload_harry(direcao=False):
-    todas_sprites = {}
-    sprites = []
-    sprite = pygame.image.load('imagens/harry_lado.png')
+def upload_sprite_sheets(largura, altura, direcao=False):
+    path = join("imagens")
+    images = [f for f in listdir(path) if isfile(join(path, f))]
 
-    sprites.append(sprite)
+    all_sprites = {}
 
-    if direcao:
-        todas_sprites['harry_lado.png'.replace('.png', '') + '_direita'] = sprites
-        todas_sprites['harry_lado.png'.replace('.png', '') + '_esquerda'] = inverte(sprites)
-    else: 
-        todas_sprites['harry_lado'.replace('.png', '')] = sprites
-    
-    return todas_sprites
+    for image in images:
+        sprite_sheet = pygame.image.load(join(path, image))
+
+        sprites = []
+        for i in range(sprite_sheet.get_width() // largura):
+            surface = pygame.Surface((largura, altura), pygame.SRCALPHA, 32)
+            rect = pygame.Rect(i * largura, 0, largura, altura)
+            surface.blit(sprite_sheet, (0, 0), rect)
+            sprites.append(pygame.transform.scale2x(surface))
+
+        if direcao:
+            all_sprites[image.replace(".png", "") + "_right"] = sprites
+            all_sprites[image.replace(".png", "") + "_left"] = inverte(sprites)
+        else:
+            all_sprites[image.replace(".png", "")] = sprites
+
+    return all_sprites
 
 
 def carrega_bloco():
@@ -90,9 +101,6 @@ def colisao_horizontal(harry, objetos, dx):
     harry.movimenta(-dx, 0)
     harry.update()
     return objeto_colidido
-
-
-
 
 
 def desenha(window, background, bg_image, harry, objetos, state):
