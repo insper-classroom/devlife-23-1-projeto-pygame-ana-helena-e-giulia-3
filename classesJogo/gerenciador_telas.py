@@ -1,6 +1,7 @@
 # Classe que irá gerenciar as telas do jogo
 from .tela_inicial import Tela_inicial
 from .tela_harry import Tela_harry
+from .tela_instrucoes import Tela_instrucoes
 import pygame
 
 class Gerenciador_Telas():
@@ -18,10 +19,12 @@ class Gerenciador_Telas():
     def tela_update(self):
         # o que vai atualizar o 'self.tela'
         proxima_tela = self.tela.verifica_colisao()
-        if proxima_tela == 'JOGO':
+        if proxima_tela == 'TELA_JOGO':
             pass
         elif proxima_tela == 'TELA_HARRY':
             self.tela = Tela_harry()
+        elif proxima_tela == 'TELA_INSTRUCOES':
+            self.tela = Tela_instrucoes()
         if proxima_tela == -1:
             return False
         return True

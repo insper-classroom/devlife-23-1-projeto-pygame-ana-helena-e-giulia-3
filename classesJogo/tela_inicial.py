@@ -39,6 +39,6 @@ class Tela_inicial():
                 return -1
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.botao_rect_play.collidepoint(event.pos):
-                    return 'JOGO'
+                    return 'TELA_JOGO'
                 elif self.botao_rect_instruc.collidepoint(event.pos):
                     return 'TELA_HARRY'
