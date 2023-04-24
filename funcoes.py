@@ -89,18 +89,18 @@ def colisao_vertical(harry, objetos, y_vel):
     
     return objetos_colididos
 
-def colisao_horizontal(harry, objetos, dx):
-    harry.movimenta(dx, 0)
-    harry.update()
-    objeto_colidido = None
-    for objeto in objetos:
-        if pygame.sprite.collide_mask(harry, objeto):
-            objeto_colidido = objeto
-            break
+# # def colisao_horizontal(harry, objetos, dx):
+# #     harry.movimenta(dx, 0)
+# #     harry.update()
+# #     objeto_colidido = None
+# #     for objeto in objetos:
+# #         if pygame.sprite.collide_mask(harry, objeto):
+# #             objeto_colidido = objeto
+# #             break
     
-    harry.movimenta(-dx, 0)
-    harry.update()
-    return objeto_colidido
+#     harry.movimenta(-dx, 0)
+#     harry.update()
+#     return objeto_colidido
 
 
 def desenha(window, background, bg_image, harry, objetos, state):
@@ -139,7 +139,7 @@ def desenha(window, background, bg_image, harry, objetos, state):
             state['tela_inicio'] = False
             state['tela_instrucoes'] = True
 
-    if state['tela_instrucoes']:
+    elif state['tela_instrucoes']:
         fundo_rpg = pygame.image.load('imagens/fundo_rpg.png')
         window.blit(fundo_rpg, (0, 0))
 
@@ -170,7 +170,7 @@ def desenha(window, background, bg_image, harry, objetos, state):
             state['tela_instrucoes'] = False
             state['tela_instrucoes2'] = True
 
-    if state['tela_instrucoes2']:
+    elif state['tela_instrucoes2']:
         fundo_instruc = pygame.image.load('imagens/fundo_instrucoes.png')
         window.blit(fundo_instruc, (0, 0))
 
@@ -209,7 +209,7 @@ def desenha(window, background, bg_image, harry, objetos, state):
             state['tela_instrucoes2'] = False
             state['tela_jogo'] = True
     
-    if state['tela_jogo']:
+    elif state['tela_jogo']:
         for tile in background:
             window.blit(bg_image, tile)
         
@@ -240,8 +240,8 @@ def main(window, assets, state):
         parede_direita = classes.Bloco(1200, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_direita)
     
-    colisao_esquerda = colisao_horizontal(harry, lista_objetos, -VEL_JOGADOR)
-    colisao_direita = colisao_horizontal(harry, lista_objetos, VEL_JOGADOR)
+    # colisao_esquerda = colisao_horizontal(harry, lista_objetos, -VEL_JOGADOR)
+    # colisao_direita = colisao_horizontal(harry, lista_objetos, VEL_JOGADOR)
     jogo = True
     while jogo: 
         clock.tick(FPS)
@@ -252,9 +252,9 @@ def main(window, assets, state):
                 break 
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT and not colisao_esquerda: 
+                if event.key == pygame.K_LEFT: 
                     harry.movimenta_esquerda(VEL_JOGADOR)
-                if event.key == pygame.K_RIGHT and not colisao_direita: 
+                if event.key == pygame.K_RIGHT: 
                     harry.movimenta_direita(VEL_JOGADOR)
                 if event.key == pygame.K_UP:
                     harry.pulo()
