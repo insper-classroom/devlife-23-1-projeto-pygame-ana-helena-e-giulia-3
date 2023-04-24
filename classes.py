@@ -3,7 +3,6 @@ import funcoes
 
 class Personagens(pygame.sprite.Sprite):
     GRAVIDADE = 1
-    SPRITE = funcoes.upload_sprite_sheets(32, 32, True)
     ANIMATION_DELAY = 3
 
     def __init__(self, x, y, width, height):
@@ -12,6 +11,8 @@ class Personagens(pygame.sprite.Sprite):
         self.x_vel = 0
         self.y_vel = 0
         self.direcao = 'esquerda'
+        self.sprite = pygame.image.load('imagens/harry_lado_direito.png')
+        self.mask = pygame.mask.from_surface(self.sprite)
         self.animation_count = 0
         self.tempo_queda = 0
         self.mask = None
@@ -49,19 +50,6 @@ class Personagens(pygame.sprite.Sprite):
         self.conta = 0
         self.y_vel *= -1
     
-    def update_sprite(self):
-        sprite_sheet = "harry_frente"
-        if self.y_vel != 0 and self.x_vel != 0:
-            sprite_sheet = "harry_lado"
-
-        sprite_sheet_name = sprite_sheet + "_" + self.direction
-        sprites = self.SPRITES[sprite_sheet_name]
-        sprite_index = (self.animation_count //
-                        self.ANIMATION_DELAY) % len(sprites)
-        self.sprite = sprites[sprite_index]
-        self.animation_count += 1
-        self.update()
-
     def update(self):
         self.rect = self.sprite.get_rect(topleft=(self.rect.x, self.rect.y))
         self.mask = pygame.mask.from_surface(self.sprite)
@@ -69,9 +57,8 @@ class Personagens(pygame.sprite.Sprite):
     def loop(self, fps):
         self.y_vel += min(1, (self.tempo_queda / fps) * self.GRAVIDADE)
         self.movimenta(self.x_vel, self.y_vel)
-
         self.tempo_queda += 1
-        self.update_sprite()
+        self.update()
     
     def desenha(self, window):
         window.blit(self.sprite, (self.rect.x, self.rect.y))
@@ -94,6 +81,7 @@ class Bloco(Objetos):
     def __init__(self, x, y, tamanho):
         super().__init__(x, y, tamanho, tamanho)
         bloco = funcoes.carrega_bloco()
+        self.mask = pygame.mask.from_surface(bloco)
         self.image.blit(bloco, (0, 0))
        
 

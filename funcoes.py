@@ -6,7 +6,7 @@ from os.path import isfile, join
 def inicializa():
     pygame.init()
     pygame.display.set_caption("Hogwarts Scape")
-    window = pygame.display.set_mode((1280, 720))
+    window = pygame.display.set_mode((1290, 720))
 
     assets = {
         'musica_fundo': pygame.mixer.music.load('som/musica_tema.mp3')
@@ -41,38 +41,8 @@ def gera_fundo():
 
     return tiles, fundo
 
-
-def inverte(sprites):
-    return [pygame.transform.flip(sprite, True, False) for sprite in sprites]
-
-
-def upload_sprite_sheets(largura, altura, direcao=False):
-    path = join("imagens")
-    images = [f for f in listdir(path) if isfile(join(path, f))]
-
-    all_sprites = {}
-
-    for image in images:
-        sprite_sheet = pygame.image.load(join(path, image))
-
-        sprites = []
-        for i in range(sprite_sheet.get_width() // largura):
-            surface = pygame.Surface((largura, altura), pygame.SRCALPHA, 32)
-            rect = pygame.Rect(i * largura, 0, largura, altura)
-            surface.blit(sprite_sheet, (0, 0), rect)
-            sprites.append(pygame.transform.scale2x(surface))
-
-        if direcao:
-            all_sprites[image.replace(".png", "") + "_right"] = sprites
-            all_sprites[image.replace(".png", "") + "_left"] = inverte(sprites)
-        else:
-            all_sprites[image.replace(".png", "")] = sprites
-
-    return all_sprites
-
-
 def carrega_bloco():
-    imagem = (pygame.transform.scale(pygame.image.load('imagens/terreno.jpg'), (80, 80)))
+    imagem = (pygame.transform.scale(pygame.image.load('imagens/terreno.jpg'), (30, 30)))
     return imagem    
 
 def colisao_vertical(harry, objetos, y_vel):
@@ -143,11 +113,11 @@ def desenha(window, background, bg_image, harry, objetos, state):
         fundo_rpg = pygame.image.load('imagens/fundo_rpg.png')
         window.blit(fundo_rpg, (0, 0))
 
-        mouse_pos = pygame.mouse.get_pos()
+        mouse_pos1 = pygame.mouse.get_pos()
 
-        fonte_text = pygame.font.Font('docs/font/WizardWorldSimplified-Kxr7.ttf', 30)
+        fonte_text2 = pygame.font.Font('docs/font/WizardWorldSimplified-Kxr7.ttf', 30)
 
-        prosseguir = fonte_text.render('Prosseguir', True, (174, 139, 71))
+        prosseguir = fonte_text2.render('Prosseguir', True, (174, 139, 71))
         prosseguir_rect = prosseguir.get_rect(center=(1180, 700))
         window.blit(prosseguir, prosseguir_rect)
 
@@ -155,18 +125,18 @@ def desenha(window, background, bg_image, harry, objetos, state):
         harry_maior = pygame.transform.scale(harry_img, (700, 700))
         window.blit(harry_maior, (-300, 30))
 
-        t1 = fonte_text.render('Olá! Eu sou o', True, (0, 0, 0))
+        t1 = fonte_text2.render('Olá! Eu sou o', True, (0, 0, 0))
         window.blit(t1, (500, 120))
-        t2 = fonte_text.render('Harry Potter! Estou', True, (0, 0, 0))
+        t2 = fonte_text2.render('Harry Potter! Estou', True, (0, 0, 0))
         window.blit(t2, (470, 160))
-        t3 = fonte_text.render('preso no porão da', True, (0, 0, 0))
+        t3 = fonte_text2.render('preso no porão da', True, (0, 0, 0))
         window.blit(t3, (470, 200))
-        t4 = fonte_text.render('Malfoy Manor e', True, (0, 0, 0))
+        t4 = fonte_text2.render('Malfoy Manor e', True, (0, 0, 0))
         window.blit(t4, (470, 240))
-        t5 = fonte_text.render('preciso da sua ajuda!', True, (0, 0, 0))
+        t5 = fonte_text2.render('preciso da sua ajuda!', True, (0, 0, 0))
         window.blit(t5, (460, 280))
 
-        if prosseguir_rect.collidepoint((mouse_pos)) and pygame.mouse.get_pressed()[0]:
+        if prosseguir_rect.collidepoint((mouse_pos1)) and pygame.mouse.get_pressed()[0]:
             state['tela_instrucoes'] = False
             state['tela_instrucoes2'] = True
 
@@ -174,7 +144,7 @@ def desenha(window, background, bg_image, harry, objetos, state):
         fundo_instruc = pygame.image.load('imagens/fundo_instrucoes.png')
         window.blit(fundo_instruc, (0, 0))
 
-        mouse_pos1 = pygame.mouse.get_pos()
+        mouse_pos2 = pygame.mouse.get_pos()
 
         fonte_tit = pygame.font.Font('docs/font/WizardWorldSimplified-Kxr7.ttf', 70)
         fonte_text1 = pygame.font.Font('docs/font/WizardWorldSimplified-Kxr7.ttf', 30)
@@ -205,7 +175,7 @@ def desenha(window, background, bg_image, harry, objetos, state):
         jogar_rect = jogar.get_rect(center=(1195, 700))
         window.blit(jogar, jogar_rect)
 
-        if jogar_rect.collidepoint((mouse_pos1)) and pygame.mouse.get_pressed()[0]:
+        if jogar_rect.collidepoint((mouse_pos2)) and pygame.mouse.get_pressed()[0]:
             state['tela_instrucoes2'] = False
             state['tela_jogo'] = True
     
@@ -225,23 +195,43 @@ def main(window, assets, state):
     clock = pygame.time.Clock()
     background, bg_image = gera_fundo()
     harry = classes.Personagens(100, 100, 50, 50)
-    tamanho_bloco = 80
+    tamanho_bloco = 30
     lista_objetos = []
-    for i in range(16):
-        chao = classes.Bloco(i * tamanho_bloco, 640, tamanho_bloco)
+    for i in range(43):
+        chao = classes.Bloco(i * tamanho_bloco, 690, tamanho_bloco)
         lista_objetos.append(chao)
-    for i in range(16):
+    for i in range(43):
         teto = classes.Bloco(i * tamanho_bloco, 0, tamanho_bloco)
         lista_objetos.append(teto)
-    for i in range(9):
+    for i in range(24):
         parede_esquerda = classes.Bloco(0, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_esquerda)
-    for i in range(9):
+    for i in range(24):
+        parede_direita = classes.Bloco(1260, i * tamanho_bloco, tamanho_bloco)
+        lista_objetos.append(parede_direita)
+    for i in range(19,23):
+        parede_direita = classes.Bloco(1230, i * tamanho_bloco, tamanho_bloco)
+        lista_objetos.append(parede_direita)
+    for i in range(21,23):
         parede_direita = classes.Bloco(1200, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_direita)
+    for i in range(1,20):
+        parede_direita = classes.Bloco(i * tamanho_bloco, 570, tamanho_bloco)
+        lista_objetos.append(parede_direita)
+    for i in range(1,20):
+        parede_direita = classes.Bloco(i * tamanho_bloco, 450, tamanho_bloco)
+        lista_objetos.append(parede_direita)
+    
+    parede_direita = classes.Bloco(20 * tamanho_bloco, 480, tamanho_bloco)
+    lista_objetos.append(parede_direita)
+    for i in range(21, 39):
+        parede_direita = classes.Bloco(i * tamanho_bloco, 510, tamanho_bloco)
+        lista_objetos.append(parede_direita)
+
     
     colisao_esquerda = colisao_horizontal(harry, lista_objetos, -VEL_JOGADOR)
     colisao_direita = colisao_horizontal(harry, lista_objetos, VEL_JOGADOR)
+
     jogo = True
     while jogo: 
         clock.tick(FPS)
@@ -253,8 +243,10 @@ def main(window, assets, state):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT and not colisao_esquerda: 
+                    harry.sprite = pygame.image.load('imagens/harry_lado_esquerdo.png')
                     harry.movimenta_esquerda(VEL_JOGADOR)
                 if event.key == pygame.K_RIGHT and not colisao_direita: 
+                    harry.sprite = pygame.image.load('imagens/harry_lado_direito.png')
                     harry.movimenta_direita(VEL_JOGADOR)
                 if event.key == pygame.K_UP:
                     harry.pulo()
