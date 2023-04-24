@@ -6,7 +6,7 @@ from os.path import isfile, join
 def inicializa():
     pygame.init()
     pygame.display.set_caption("Hogwarts Scape")
-    window = pygame.display.set_mode((1290, 720))
+    window = pygame.display.set_mode((1280, 720))
 
     assets = {
         'musica_fundo': pygame.mixer.music.load('som/musica_tema.mp3')
@@ -69,7 +69,7 @@ def colisao_vertical(harry, objetos, y_vel):
 # #             break
     
 #     harry.movimenta(-dx, 0)
-#     harry.update()
+#     harry.update()desenha
 #     return objeto_colidido
 
 

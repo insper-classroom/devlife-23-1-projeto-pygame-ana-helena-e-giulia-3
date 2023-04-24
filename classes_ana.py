@@ -95,23 +95,21 @@ class Bloco(Objetos):
         self.image.blit(bloco, (0, 0))
        
 class Tela_inicial():
-    def __init__(self, imagem_fundo, caminho_fonte):
-        self.imagem_fundo = imagem_fundo 
+    def __init__(self):
         self.mouse_pos = pygame.mouse.get_pos()
-        self.caminho_fonte = caminho_fonte
 
     def desenha(self, window):
         window.fill(0, 0, 0)
 
-        imagem_fundo = pygame.image.load(self.imagem_fundo)
+        imagem_fundo = pygame.image.load('imagens/fundo_inicio.png')
         fundo = pygame.transform.scale(imagem_fundo, (1280, 720))
         window.blit(fundo, (0, 0))
 
-        fonte = pygame.font.Font(self.caminho_fonte, 100)
+        fonte = pygame.font.Font('docs/font/WizardWorldSimplified-Kxr7.ttf', 100)
         titulo_jogo = fonte.render('Hogwarts Scape', True, (211, 177, 110))
         window.blit(titulo_jogo, (220, 130))
 
-        fonte_texto = pygame.font.Font(f'{self.caminho_fonte}', 60)
+        fonte_texto = pygame.font.Font('docs/font/WizardWorldSimplified-Kxr7.ttf', 60)
 
         self.botao_rect_play = pygame.Rect(515, 315, 250, 80)
         pygame.draw.rect(window, (240, 229, 198), self.botao_rect_play)
@@ -133,10 +131,10 @@ class Tela_inicial():
                 return False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.botao_rect_play.collidepoint(self.mouse_pos):
-                    return -1
+                    return True
                 elif self.botao_rect_instruc.collidepoint(self.mouse_pos):
-                    return -2
-        # return self
+                    return True
+        return self
 
 class Tela_harry():
     def __init__(self, imagem_fundo, imagem_harry, caminho_fonte):
