@@ -1,5 +1,6 @@
 import pygame
 import classes
+from classesJogo.personagens import Personagens
 from os import listdir
 from os.path import isfile, join
 
@@ -194,7 +195,7 @@ def desenha(window, background, bg_image, harry, objetos, state):
 def main(window, assets, state):
     clock = pygame.time.Clock()
     background, bg_image = gera_fundo()
-    harry = classes.Personagens(100, 100, 50, 50)
+    harry = Personagens(100, 100, 50, 50)
     tamanho_bloco = 30
     lista_objetos = []
     for i in range(43):
