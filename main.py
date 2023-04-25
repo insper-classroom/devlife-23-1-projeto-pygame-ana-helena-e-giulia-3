@@ -5,4 +5,4 @@ pygame.init()
 pygame.display.set_caption("Hogwarts Scape")
 window = pygame.display.set_mode((1280, 720))
 tela = Gerenciador_Telas(window)
-tela.game_loop() # Loop único e principal do jogo
+tela.game_loop() 
