@@ -2,6 +2,7 @@
 from .tela_inicial import Tela_inicial
 from .tela_harry import Tela_harry
 from .tela_instrucoes import Tela_instrucoes
+from .tela_jogo import Tela_jogo
 import pygame
 
 class Gerenciador_Telas():
@@ -22,10 +23,10 @@ class Gerenciador_Telas():
         if proxima_tela == -1:
             return False
         if proxima_tela == 'TELA_JOGO':
-            pass
-        elif proxima_tela == 'TELA_HARRY':
+            self.tela = Tela_jogo()
+        if proxima_tela == 'TELA_HARRY':
             self.tela = Tela_harry()
-        elif proxima_tela == 'TELA_INSTRUCOES':
+        if proxima_tela == 'TELA_INSTRUCOES':
             self.tela = Tela_instrucoes()
         return True
 

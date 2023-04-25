@@ -7,7 +7,7 @@ from os.path import isfile, join
 def inicializa():
     pygame.init()
     pygame.display.set_caption("Hogwarts Scape")
-    window = pygame.display.set_mode((1280, 720))
+    window = pygame.display.set_mode((1290, 720))
 
     assets = {
         'musica_fundo': pygame.mixer.music.load('som/musica_tema.mp3')
@@ -53,7 +53,7 @@ def colisao_vertical(harry, objetos, y_vel):
             if y_vel > 0:
                 harry.rect.bottom = objeto.rect.top
                 harry.atingiu_chao()
-            if y_vel < 0:
+            elif y_vel < 0:
                 harry.rect.top = objeto.rect.bottom
                 harry.bateu_cabeca()
         objetos_colididos.append(objeto)
@@ -195,7 +195,7 @@ def desenha(window, background, bg_image, harry, objetos, state):
 def main(window, assets, state):
     clock = pygame.time.Clock()
     background, bg_image = gera_fundo()
-    harry = Personagens(100, 100, 50, 50)
+    harry = Personagens(100, 100, 129, 72)
     tamanho_bloco = 30
     lista_objetos = []
     for i in range(43):
@@ -244,8 +244,10 @@ def main(window, assets, state):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT: 
+                    harry.sprite = pygame.image.load('imagens/harry_lado_esquerdo.png')
                     harry.movimenta_esquerda(VEL_JOGADOR)
                 if event.key == pygame.K_RIGHT: 
+                    harry.sprite = pygame.image.load('imagens/harry_lado_direito.png')
                     harry.movimenta_direita(VEL_JOGADOR)
                 if event.key == pygame.K_UP:
                     harry.pulo()
