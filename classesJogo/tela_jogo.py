@@ -1,5 +1,5 @@
 import pygame
-from .personagens import Personagens
+from .harry import Harry
 
 VEL_JOGADOR = 15
 FPS = 60
@@ -10,48 +10,51 @@ class Tela_jogo():
         self.altura_imagem_fundo = 144
         self.fundo = pygame.transform.scale(pygame.image.load('imagens/fundo.jpg'), (self.largura_imagem_fundo, self.altura_imagem_fundo))
         self.lista_imagem_fundo = []
-        self.bloco = pygame.transform.scale(pygame.image.load('imagens/terreno.jpg'), (30, 30))
-        self.harry = Personagens(100, 100)
-        self.posicao_harry = [self.harry.rect.x, self.harry.rect.y]
+        self.harry = Harry()
+        self.todas_sprites = pygame.sprite.Group()
+        self.todas_sprites.add(self.harry)
+        self.delta_t = 0
+        self.t0 = 0
+        # self.bloco = pygame.transform.scale(pygame.image.load('imagens/terreno.jpg'), (30, 30))
 
     def gera_fundo(self):
+        # gera a tela de fundo 
         for i in range(1280 // self.largura_imagem_fundo + 1):
             for j in range(720 // self.altura_imagem_fundo + 1):
                 posicao = (i * self.largura_imagem_fundo, j * self.altura_imagem_fundo)
                 self.lista_imagem_fundo.append(posicao)
         
     def desenha(self, window):
+        # desenha tudo na tela 
         window.fill((0, 0, 0))
 
         self.gera_fundo()
         for imagem in self.lista_imagem_fundo:
             window.blit(self.fundo, imagem)
-        
-        self.harry.desenha(window)
-    
 
-    def verifica_colisao(self):
-        clock = pygame.time.Clock()
-        clock.tick(FPS)
-        self.harry.anda()
-    
+        self.todas_sprites.draw(window)
+
+    def atualiza_estado(self):
+        t1 = pygame.time.get_ticks()
+        self.delta_t = (t1 - self.t0) / 1000
+        self.t0 = t1
+
+        self.todas_sprites.update(self.delta_t)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
             
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT: 
-                    self.harry.sprite =  pygame.transform.scale(pygame.image.load('imagens/harry_lado_esquerdo.png'), (135, 135))
-                    self.harry.movimenta_esquerda(VEL_JOGADOR)
-                if event.key == pygame.K_RIGHT: 
-                    self.harry.sprite =  pygame.transform.scale(pygame.image.load('imagens/harry_lado_direito.png'), (135, 135))
-                    self.harry.movimenta_direita(VEL_JOGADOR)
-                if event.key == pygame.K_UP:
-                    self.harry.pulo()
-        
+                if event.key == pygame.K_LEFT:
+                    self.harry.velocidade -= 500
+                elif event.key == pygame.K_RIGHT:
+                    self.harry.velocidade += 500
+
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
-                    self.harry.movimenta_esquerda(0)
-                if event.key == pygame.K_RIGHT:
-                    self.harry.movimenta_direita(0) 
-           
+                    self.harry.velocidade += 500
+                elif event.key == pygame.K_RIGHT:
+                    self.harry.velocidade -= 500
+
+        return True

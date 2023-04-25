@@ -33,7 +33,7 @@ class Tela_harry():
         t5 = self.fonte_texto.render('preciso da sua ajuda!', True, (0, 0, 0))
         window.blit(t5, (460, 280))
 
-    def verifica_colisao(self):
+    def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1

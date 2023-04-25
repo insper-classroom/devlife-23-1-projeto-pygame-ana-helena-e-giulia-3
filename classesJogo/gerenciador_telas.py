@@ -19,7 +19,7 @@ class Gerenciador_Telas():
 
     def tela_update(self):
         # o que vai atualizar o 'self.tela'
-        proxima_tela = self.tela.verifica_colisao()
+        proxima_tela = self.tela.atualiza_estado()
         if proxima_tela == -1:
             return False
         if proxima_tela == 'TELA_JOGO':

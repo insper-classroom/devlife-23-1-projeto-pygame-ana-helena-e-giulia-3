@@ -33,7 +33,7 @@ class Tela_inicial():
 
         window.blit(self.instrucoes, self.instrucoes_rect)
 
-    def verifica_colisao(self):
+    def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1

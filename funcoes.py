@@ -1,6 +1,6 @@
 import pygame
 import classes
-from classesJogo.personagens import Personagens
+from classesJogo.harry import Personagens
 from os import listdir
 from os.path import isfile, join
 
