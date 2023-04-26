@@ -9,13 +9,14 @@ class Tela_jogo():
         self.altura_imagem_fundo = 144
         self.fundo = pygame.transform.scale(pygame.image.load('imagens/fundo.jpg'), (self.largura_imagem_fundo, self.altura_imagem_fundo)).convert_alpha()
         self.lista_imagem_fundo = []
-        self.harry = Harry()
-        self.draco = Draco()
         self.tamanho_bloco = 20
         self.lista_objetos = []
-        self.todas_sprites = pygame.sprite.Group()
-        self.todas_sprites.add(self.harry)
-        self.todas_sprites.add(self.draco)
+        self.sprite_personagens = pygame.sprite.Group()
+        self.sprite_objetos = pygame.sprite.Group()
+        self.harry = Harry()
+        self.draco = Draco(self.lista_objetos)
+        self.sprite_personagens.add(self.harry)
+        self.sprite_personagens.add(self.draco)
         self.gera_fundo() 
         self.gera_terreno()
 
@@ -30,66 +31,86 @@ class Tela_jogo():
         # desenha as bordas
         for i in range(64):
             chao = Bloco(i * self.tamanho_bloco, 700, self.tamanho_bloco)
-            self.lista_objetos.append(chao)
+            self.lista_objetos.append(chao.rect)
+            self.sprite_objetos.add(chao)
         for i in range(64):
             teto = Bloco(i * self.tamanho_bloco, 0, self.tamanho_bloco)
-            self.lista_objetos.append(teto)
+            self.lista_objetos.append(teto.rect)
+            self.sprite_objetos.add(teto)
         for i in range(36):
             parede_esquerda = Bloco(0, i * self.tamanho_bloco, self.tamanho_bloco)
-            self.lista_objetos.append(parede_esquerda)
+            self.lista_objetos.append(parede_esquerda.rect)
+            self.sprite_objetos.add(parede_esquerda)
         for i in range(36):
             parede_direita = Bloco(1260, i * self.tamanho_bloco, self.tamanho_bloco)
-            self.lista_objetos.append(parede_direita)
+            self.lista_objetos.append(parede_direita.rect)
+            self.sprite_objetos.add(parede_direita)
 
         # desenha dentro do mapa
         for i in range(64):
             chao = Bloco(i * self.tamanho_bloco, 680, self.tamanho_bloco)
-            self.lista_objetos.append(chao)
+            self.lista_objetos.append(chao.rect)
+            self.sprite_objetos.add(chao)
         for i in range(59, 64):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 660, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_direita)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
         for i in range(59, 64):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 640, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_direita)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
         for i in range(59, 64):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 620, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_direita)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
         for i in range(59, 64):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 600, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_direita)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
         for i in range(0, 7):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 570, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
         for i in range(0, 55):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 470, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
         for i in range(0, 55):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 450, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
         for i in range(0, 5):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 390, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
         for i in range(0, 5):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 430, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
         for i in range(0, 5):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 410, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
         for i in range(10, 64):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 320, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_direita)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
         for i in range(10, 64):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 340, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_direita)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
         for i in range(0, 47):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 170, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_direita)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
         for i in range(0, 47):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 190, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_direita)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
         for i in range(55, 64):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 220, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
         
     def desenha(self, window):
         # desenha tudo na tela 
@@ -97,11 +118,9 @@ class Tela_jogo():
 
         for imagem in self.lista_imagem_fundo:
             window.blit(self.fundo, imagem)
-        
-        for objeto in self.lista_objetos:
-            objeto.desenha(window)
 
-        self.todas_sprites.draw(window)
+        self.sprite_personagens.draw(window)
+        self.sprite_objetos.draw(window)
 
     def atualiza_estado(self):
 
@@ -119,7 +138,12 @@ class Tela_jogo():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.draco.state['pulando'] = True
+                    self.draco.state['caindo'] = False
 
-        self.todas_sprites.update()
+        self.sprite_personagens.update()
+        self.sprite_objetos.update()
 
         return True
