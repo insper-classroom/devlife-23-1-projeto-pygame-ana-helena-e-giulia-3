@@ -8,7 +8,7 @@ import pygame
 class Gerenciador_Telas():
     def __init__(self, window):
         self.window = window
-        self.tela = Tela_inicial()
+        self.tela = Tela_jogo()
     
     def game_loop(self):
         jogo = True
