@@ -14,5 +14,5 @@ class Objetos(pygame.sprite.Sprite):
 class Bloco(Objetos):
     def __init__(self, x, y, tamanho):
         super().__init__(x, y, tamanho, tamanho)
-        bloco = pygame.transform.scale(pygame.image.load('imagens/terreno4.jpg'), (20, 20))
+        bloco = pygame.transform.scale(pygame.image.load('imagens/terreno.jpg'), (20, 20))
         self.image.blit(bloco, (0, 0)) 
