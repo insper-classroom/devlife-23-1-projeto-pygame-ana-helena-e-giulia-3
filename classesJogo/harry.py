@@ -14,4 +14,3 @@ class Harry(pygame.sprite.Sprite):
     
     def movimenta_direita(self):
         self.rect.x += 2
-    
