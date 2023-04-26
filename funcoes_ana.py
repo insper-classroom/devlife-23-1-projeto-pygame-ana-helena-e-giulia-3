@@ -1,5 +1,5 @@
 import pygame
-import classes
+import classesJogo.objetos as objetos
 from os import listdir
 from os.path import isfile, join
 
@@ -13,7 +13,7 @@ def inicializa():
     }
 
     state = {
-        'tela': classes.Tela_inicial('imagens/fundo_inicio.png', 'docs/font/WizardWorldSimplified-Kxr7.ttf')
+        'tela': objetos.Tela_inicial('imagens/fundo_inicio.png', 'docs/font/WizardWorldSimplified-Kxr7.ttf')
     }
 
     pygame.mixer.music.play()
@@ -157,20 +157,20 @@ def desenha(window, background, bg_image, harry, objetos, state):
 def main(window, assets, state):
     clock = pygame.time.Clock()
     background, bg_image = gera_fundo()
-    harry = classes.Personagens(100, 100, 50, 50)
+    harry = objetos.Personagens(100, 100, 50, 50)
     tamanho_bloco = 80
     lista_objetos = []
     for i in range(16):
-        chao = classes.Bloco(i * tamanho_bloco, 640, tamanho_bloco)
+        chao = objetos.Bloco(i * tamanho_bloco, 640, tamanho_bloco)
         lista_objetos.append(chao)
     for i in range(16):
-        teto = classes.Bloco(i * tamanho_bloco, 0, tamanho_bloco)
+        teto = objetos.Bloco(i * tamanho_bloco, 0, tamanho_bloco)
         lista_objetos.append(teto)
     for i in range(9):
-        parede_esquerda = classes.Bloco(0, i * tamanho_bloco, tamanho_bloco)
+        parede_esquerda = objetos.Bloco(0, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_esquerda)
     for i in range(9):
-        parede_direita = classes.Bloco(1200, i * tamanho_bloco, tamanho_bloco)
+        parede_direita = objetos.Bloco(1200, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_direita)
     
     # colisao_esquerda = colisao_horizontal(harry, lista_objetos, -VEL_JOGADOR)

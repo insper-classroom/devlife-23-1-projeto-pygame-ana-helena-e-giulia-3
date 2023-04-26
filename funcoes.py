@@ -1,5 +1,5 @@
 import pygame
-import classes
+import classesJogo.objetos as objetos
 from classesJogo.harry import Personagens
 from os import listdir
 from os.path import isfile, join
@@ -199,34 +199,34 @@ def main(window, assets, state):
     tamanho_bloco = 30
     lista_objetos = []
     for i in range(43):
-        chao = classes.Bloco(i * tamanho_bloco, 690, tamanho_bloco)
+        chao = objetos.Bloco(i * tamanho_bloco, 690, tamanho_bloco)
         lista_objetos.append(chao)
     for i in range(43):
-        teto = classes.Bloco(i * tamanho_bloco, 0, tamanho_bloco)
+        teto = objetos.Bloco(i * tamanho_bloco, 0, tamanho_bloco)
         lista_objetos.append(teto)
     for i in range(24):
-        parede_esquerda = classes.Bloco(0, i * tamanho_bloco, tamanho_bloco)
+        parede_esquerda = objetos.Bloco(0, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_esquerda)
     for i in range(24):
-        parede_direita = classes.Bloco(1260, i * tamanho_bloco, tamanho_bloco)
+        parede_direita = objetos.Bloco(1260, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_direita)
     for i in range(19,23):
-        parede_direita = classes.Bloco(1230, i * tamanho_bloco, tamanho_bloco)
+        parede_direita = objetos.Bloco(1230, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_direita)
     for i in range(21,23):
-        parede_direita = classes.Bloco(1200, i * tamanho_bloco, tamanho_bloco)
+        parede_direita = objetos.Bloco(1200, i * tamanho_bloco, tamanho_bloco)
         lista_objetos.append(parede_direita)
     for i in range(1,20):
-        parede_direita = classes.Bloco(i * tamanho_bloco, 570, tamanho_bloco)
+        parede_direita = objetos.Bloco(i * tamanho_bloco, 570, tamanho_bloco)
         lista_objetos.append(parede_direita)
     for i in range(1,20):
-        parede_direita = classes.Bloco(i * tamanho_bloco, 450, tamanho_bloco)
+        parede_direita = objetos.Bloco(i * tamanho_bloco, 450, tamanho_bloco)
         lista_objetos.append(parede_direita)
     
-    parede_direita = classes.Bloco(20 * tamanho_bloco, 480, tamanho_bloco)
+    parede_direita = objetos.Bloco(20 * tamanho_bloco, 480, tamanho_bloco)
     lista_objetos.append(parede_direita)
     for i in range(21, 39):
-        parede_direita = classes.Bloco(i * tamanho_bloco, 510, tamanho_bloco)
+        parede_direita = objetos.Bloco(i * tamanho_bloco, 510, tamanho_bloco)
         lista_objetos.append(parede_direita)
 
     

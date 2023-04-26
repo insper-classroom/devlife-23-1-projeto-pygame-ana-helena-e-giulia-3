@@ -1,14 +1,12 @@
 import pygame
-import funcoes
 
 class Objetos(pygame.sprite.Sprite):
-    def __init__(self, x, y, largura, altura, nome=None):
+    def __init__(self, x, y, largura, altura):
         super().__init__()
         self.rect = pygame.Rect(x, y, largura, altura)
-        self.image = pygame.Surface((largura, altura), pygame.SRCALPHA)
+        self.image = pygame.Surface((largura, altura))
         self.largura = largura
         self.altura = altura
-        self.nome = nome
     
     def desenha(self, window):
         window.blit(self.image, (self.rect.x, self.rect.y))
@@ -16,8 +14,7 @@ class Objetos(pygame.sprite.Sprite):
 class Bloco(Objetos):
     def __init__(self, x, y, tamanho):
         super().__init__(x, y, tamanho, tamanho)
-        bloco = funcoes.carrega_bloco()
-        self.mask = pygame.mask.from_surface(bloco)
+        bloco = pygame.transform.scale(pygame.image.load('imagens/terreno4.jpg'), (20, 20))
         self.image.blit(bloco, (0, 0))
        
 

@@ -1,6 +1,7 @@
 import pygame
 from .harry import Harry
 from .draco import Draco
+from .objetos import Bloco
 
 VEL_JOGADOR = 15
 FPS = 60
@@ -13,12 +14,14 @@ class Tela_jogo():
         self.lista_imagem_fundo = []
         self.harry = Harry()
         self.draco = Draco()
+        self.tamanho_bloco = 20
+        self.lista_objetos = []
         self.todas_sprites = pygame.sprite.Group()
         self.todas_sprites.add(self.harry)
         self.todas_sprites.add(self.draco)
         self.gera_fundo() 
+        self.gera_terreno()
 
-        # self.bloco = pygame.transform.scale(pygame.image.load('imagens/terreno.jpg'), (30, 30))
 
     def gera_fundo(self):
         # gera a tela de fundo 
@@ -26,6 +29,21 @@ class Tela_jogo():
             for j in range(720 // self.altura_imagem_fundo + 1):
                 posicao = (i * self.largura_imagem_fundo, j * self.altura_imagem_fundo)
                 self.lista_imagem_fundo.append(posicao)
+    
+    def gera_terreno(self):
+        for i in range(64):
+            chao = Bloco(i * self.tamanho_bloco, 700, self.tamanho_bloco)
+            self.lista_objetos.append(chao)
+        for i in range(64):
+            teto = Bloco(i * self.tamanho_bloco, 0, self.tamanho_bloco)
+            self.lista_objetos.append(teto)
+        for i in range(36):
+            parede_esquerda = Bloco(0, i * self.tamanho_bloco, self.tamanho_bloco)
+            self.lista_objetos.append(parede_esquerda)
+        for i in range(36):
+            parede_direita = Bloco(1260, i * self.tamanho_bloco, self.tamanho_bloco)
+            self.lista_objetos.append(parede_direita)
+
         
     def desenha(self, window):
         # desenha tudo na tela 
@@ -33,9 +51,11 @@ class Tela_jogo():
 
         for imagem in self.lista_imagem_fundo:
             window.blit(self.fundo, imagem)
+        
+        for objeto in self.lista_objetos:
+            objeto.desenha(window)
 
         self.todas_sprites.draw(window)
-        pygame.display.update()
 
     def atualiza_estado(self):
 
@@ -56,5 +76,4 @@ class Tela_jogo():
 
         self.todas_sprites.update()
 
-        
         return True
