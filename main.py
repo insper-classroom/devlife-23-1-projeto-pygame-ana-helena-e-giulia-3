@@ -1,6 +1,6 @@
 from classesJogo.gerenciador_telas import Gerenciador_Telas
 import pygame
-3
+
 pygame.init()
 pygame.display.set_caption("Hogwarts Scape")
 window = pygame.display.set_mode((1280, 720))

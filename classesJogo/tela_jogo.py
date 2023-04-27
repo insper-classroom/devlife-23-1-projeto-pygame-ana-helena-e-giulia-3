@@ -143,6 +143,10 @@ class Tela_jogo():
                     self.draco.state['pulando'] = True
                     self.draco.state['caindo'] = False
 
+                if event.key == pygame.K_UP:
+                    self.harry.state['pulando'] = True
+                    self.harry.state['caindo'] = False
+
         self.sprite_personagens.update()
         self.sprite_objetos.update()
 
