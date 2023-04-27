@@ -13,7 +13,7 @@ class Tela_jogo():
         self.lista_objetos = []
         self.sprite_personagens = pygame.sprite.Group()
         self.sprite_objetos = pygame.sprite.Group()
-        self.harry = Harry()
+        self.harry = Harry(self.lista_objetos)
         self.draco = Draco(self.lista_objetos)
         self.sprite_personagens.add(self.harry)
         self.sprite_personagens.add(self.draco)
@@ -138,10 +138,10 @@ class Tela_jogo():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
-            # elif event.type == pygame.KEYDOWN:
-            #     if event.key == pygame.K_SPACE:
-            #         self.draco.state['pulando'] = True
-            #         self.draco.state['caindo'] = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_w:
+                    self.draco.state['pulando'] = True
+                    self.draco.state['caindo'] = False
 
         self.sprite_personagens.update()
         self.sprite_objetos.update()
