@@ -1,7 +1,7 @@
 import pygame
 from .harry import Harry
 from .draco import Draco
-from .objetos import Bloco
+from .objetos import Bloco, Água_Draco, Água_Harry, Água_toxica
 
 class Tela_jogo():
     def __init__(self):
@@ -10,9 +10,15 @@ class Tela_jogo():
         self.fundo = pygame.transform.scale(pygame.image.load('imagens/fundo.jpg'), (self.largura_imagem_fundo, self.altura_imagem_fundo)).convert_alpha()
         self.lista_imagem_fundo = []
         self.tamanho_bloco = 20
+        self.largura_agua = 160
+        self.altura_agua = 40
         self.lista_objetos = []
+        self.lista_agua_draco = []
+        self.lista_agua_harry = []
+        self.lista_agua_toxica = []
         self.sprite_personagens = pygame.sprite.Group()
         self.sprite_objetos = pygame.sprite.Group()
+        self.sprite_aguas = pygame.sprite.Group()
         self.harry = Harry(self.lista_objetos)
         self.draco = Draco(self.lista_objetos)
         self.sprite_personagens.add(self.harry)
@@ -111,6 +117,43 @@ class Tela_jogo():
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 220, self.tamanho_bloco)
             self.lista_objetos.append(plataforma_esquerda.rect)
             self.sprite_objetos.add(plataforma_esquerda)
+
+        agua_draco = Água_Draco(2 * self.largura_agua, 680, self.largura_agua, self.altura_agua)
+        self.lista_agua_draco.append(agua_draco.rect)
+        self.sprite_aguas.add(agua_draco)
+
+        agua_draco2 = Água_Draco(5 * self.largura_agua, 450, self.largura_agua, self.altura_agua)
+        self.lista_agua_draco.append(agua_draco2.rect)
+        self.sprite_aguas.add(agua_draco2)
+
+        agua_harry1 = Água_Harry(4 * self.largura_agua, 680, self.largura_agua, self.altura_agua)
+        self.lista_agua_harry.append(agua_harry1.rect)
+        self.sprite_aguas.add(agua_harry1)
+
+        agua_harry2 = Água_Harry(3 * self.largura_agua, 320, self.largura_agua, self.altura_agua)
+        self.lista_agua_harry.append(agua_harry2.rect)
+        self.sprite_aguas.add(agua_harry2)
+
+        agua_toxica = Água_toxica(320, 450, 320, self.altura_agua)
+        self.lista_agua_toxica.append(agua_toxica.rect)
+        self.sprite_aguas.add(agua_toxica)
+
+        agua_toxica2 = Água_toxica(800, 320, 320, self.altura_agua)
+        self.lista_agua_toxica.append(agua_toxica2.rect)
+        self.sprite_aguas.add(agua_toxica2)
+        
+    def checa_agua(self):
+        for agua_harry in self.lista_agua_harry:
+            if self.draco.rect.colliderect(agua_harry):
+                return -1
+
+        for agua_draco in self.lista_agua_draco:
+            if self.harry.rect.colliderect(agua_draco):
+                return -1
+
+        for agua_toxica in self.lista_agua_toxica:
+            if self.harry.rect.colliderect(agua_toxica) or self.draco.rect.colliderect(agua_toxica):
+                return -1
         
     def desenha(self, window):
         # desenha tudo na tela 
@@ -121,8 +164,10 @@ class Tela_jogo():
 
         self.sprite_personagens.draw(window)
         self.sprite_objetos.draw(window)
+        self.sprite_aguas.draw(window)
 
     def atualiza_estado(self):
+        self.checa_agua()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
@@ -137,6 +182,8 @@ class Tela_jogo():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                return -1
+            if self.checa_agua() == -1:
                 return -1
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:

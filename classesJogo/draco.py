@@ -1,4 +1,5 @@
 import pygame
+from .objetos import Água_Harry, Água_toxica
 
 class Draco(pygame.sprite.Sprite):
     def __init__(self, lista_blocos):
@@ -10,6 +11,7 @@ class Draco(pygame.sprite.Sprite):
         self.rect.x = 20
         self.rect.y = 500
         self.GRAVIDADE = 2
+        self.jump = 70
         self.state = {
             'pulando': False,
             'caindo': True
@@ -31,7 +33,7 @@ class Draco(pygame.sprite.Sprite):
 
     def update(self):
         if self.state['pulando'] == True:
-            self.rect.y -= 100
+            self.rect.y -= self.jump
         if self.state['caindo'] == True:
             self.rect.y += self.GRAVIDADE
         self.state['caindo'] = True
