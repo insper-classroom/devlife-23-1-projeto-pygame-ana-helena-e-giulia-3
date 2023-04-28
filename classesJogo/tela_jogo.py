@@ -16,7 +16,7 @@ class Tela_jogo():
         self.lista_agua_draco = []
         self.lista_agua_harry = []
         self.lista_agua_toxica = []
-        self.lista_horcruxes = []
+        self.lista_horcruxes_draco = []
         self.sprite_personagens = pygame.sprite.Group()
         self.sprite_objetos = pygame.sprite.Group()
         self.sprite_aguas = pygame.sprite.Group()
@@ -153,15 +153,15 @@ class Tela_jogo():
 
         # adiciona as horcruxes na tela
         diario = Horcrux(380, 520, 40, 40, 'imagens/diario_tom_riddle.png')
-        self.lista_horcruxes.append(diario.rect)
+        self.lista_horcruxes_draco.append(diario.rect)
         self.sprite_horcruxes.add(diario)
 
         medalhao = Horcrux(600, 500, 40, 40, 'imagens/medalhao.png')
-        self.lista_horcruxes.append(medalhao.rect)
+        self.lista_horcruxes_draco.append(medalhao.rect)
         self.sprite_horcruxes.add(medalhao)
 
         taca = Horcrux(700, 500, 40, 40, 'imagens/taca.png')
-        self.lista_horcruxes.append(taca.rect)
+        self.lista_horcruxes_draco.append(taca.rect)
         self.sprite_horcruxes.add(taca)
         
     def checa_agua(self):
@@ -176,6 +176,11 @@ class Tela_jogo():
         for agua_toxica in self.lista_agua_toxica:
             if self.harry.rect.colliderect(agua_toxica) or self.draco.rect.colliderect(agua_toxica):
                 return -1
+            
+    def checa_horcruxes(self):
+        for horcrux in self.lista_horcruxes_draco:
+            if self.draco.rect.colliderect(horcrux):
+                print(1)
         
     def desenha(self, window):
         # desenha tudo na tela 
@@ -191,6 +196,7 @@ class Tela_jogo():
 
     def atualiza_estado(self):
         self.checa_agua()
+        self.checa_horcruxes()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
