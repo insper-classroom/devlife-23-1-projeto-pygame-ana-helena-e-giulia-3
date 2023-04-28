@@ -1,7 +1,7 @@
 import pygame
 from .harry import Harry
 from .draco import Draco
-from .objetos import Bloco, Água_Draco, Água_Harry, Água_toxica
+from .objetos import Bloco, Água_Draco, Água_Harry, Água_toxica, Horcrux
 
 class Tela_jogo():
     def __init__(self):
@@ -16,9 +16,11 @@ class Tela_jogo():
         self.lista_agua_draco = []
         self.lista_agua_harry = []
         self.lista_agua_toxica = []
+        self.lista_horcruxes = []
         self.sprite_personagens = pygame.sprite.Group()
         self.sprite_objetos = pygame.sprite.Group()
         self.sprite_aguas = pygame.sprite.Group()
+        self.sprite_horcruxes = pygame.sprite.Group()
         self.harry = Harry(self.lista_objetos)
         self.draco = Draco(self.lista_objetos)
         self.sprite_personagens.add(self.harry)
@@ -118,6 +120,13 @@ class Tela_jogo():
             self.lista_objetos.append(plataforma_esquerda.rect)
             self.sprite_objetos.add(plataforma_esquerda)
 
+        # plataforma das horcruxes
+        for i in range(15, 25):
+            plataforma_esquerda = Bloco(i * self.tamanho_bloco, 570, self.tamanho_bloco)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
+
+        # adiciona as aguas na tela
         agua_draco = Água_Draco(2 * self.largura_agua, 680, self.largura_agua, self.altura_agua)
         self.lista_agua_draco.append(agua_draco.rect)
         self.sprite_aguas.add(agua_draco)
@@ -141,6 +150,19 @@ class Tela_jogo():
         agua_toxica2 = Água_toxica(800, 320, 320, self.altura_agua)
         self.lista_agua_toxica.append(agua_toxica2.rect)
         self.sprite_aguas.add(agua_toxica2)
+
+        # adiciona as horcruxes na tela
+        diario = Horcrux(380, 520, 40, 40, 'imagens/diario_tom_riddle.png')
+        self.lista_horcruxes.append(diario.rect)
+        self.sprite_horcruxes.add(diario)
+
+        medalhao = Horcrux(600, 500, 40, 40, 'imagens/medalhao.png')
+        self.lista_horcruxes.append(medalhao.rect)
+        self.sprite_horcruxes.add(medalhao)
+
+        taca = Horcrux(700, 500, 40, 40, 'imagens/taca.png')
+        self.lista_horcruxes.append(taca.rect)
+        self.sprite_horcruxes.add(taca)
         
     def checa_agua(self):
         for agua_harry in self.lista_agua_harry:
@@ -165,6 +187,7 @@ class Tela_jogo():
         self.sprite_personagens.draw(window)
         self.sprite_objetos.draw(window)
         self.sprite_aguas.draw(window)
+        self.sprite_horcruxes.draw(window)
 
     def atualiza_estado(self):
         self.checa_agua()

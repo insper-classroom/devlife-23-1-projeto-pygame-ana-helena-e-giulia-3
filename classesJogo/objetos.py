@@ -38,3 +38,8 @@ class Água_toxica(Objetos):
         água_toxica = pygame.transform.scale(pygame.image.load('imagens/água_tóxica.jpg'), (320, 40))
         self.image.blit(água_toxica, (0, 0)) 
 
+class Horcrux(Objetos):
+    def __init__(self, x, y, largura, altura, imagem):
+        super().__init__(x, y, largura, altura)
+        horcrux = pygame.transform.scale(pygame.image.load(imagem), (40, 40))
+        self.image.blit(horcrux, (0, 0)) 
