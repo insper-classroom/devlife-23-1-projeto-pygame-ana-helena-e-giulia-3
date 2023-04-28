@@ -1,5 +1,4 @@
 import pygame
-from .objetos import Água_Harry, Água_toxica
 
 class Draco(pygame.sprite.Sprite):
     def __init__(self, lista_blocos):
