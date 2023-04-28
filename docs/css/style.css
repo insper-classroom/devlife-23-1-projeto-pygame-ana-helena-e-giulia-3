@@ -51,10 +51,16 @@ h3 {
     margin-bottom: 1%;
 }
 
+h4 {
+  font-family:'Times New Roman', Times, serif;
+  color: rgb(174, 139, 71);
+  font-size: 20px;
+}
+
 .menu{
+  position: fixed;
   overflow: hidden;
   background-color: black;
-  position: fixed;
   top: 0%;
 }
 
@@ -170,18 +176,42 @@ h3 {
     margin-top: 90px;
     display: flex;
     flex-direction: row;
-    justify-content: left; 
   }
 
   .img-container img {
     width: 20%;
-    margin-left: 20px; 
+    margin-left: 20%; 
     margin-bottom: 2%;
     margin-top: 20px;
     border-radius: 50%;
   }
+  
+  .devs{
+    display: inline;
+  }
+
+  .ana-dev{
+    display: inline;
+    margin-left: 365px;
+  }
+
+  .giu-dev{
+    display: inline;
+    margin-left: 450px;
+  }
+
+  .ana-semestre{
+    display: inline;
+    margin-left: 340px;
+  }
+  
+  .giu-semestre{
+    display: inline;
+    margin-left: 422px;
+  }
 
   .footer {
+    margin-top: 5%;
     text-align: center;
     padding: 35px;
     background-color: rgb(43, 42, 41);
