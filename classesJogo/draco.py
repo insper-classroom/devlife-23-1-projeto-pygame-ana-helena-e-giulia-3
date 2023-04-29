@@ -38,6 +38,9 @@ class Draco(pygame.sprite.Sprite):
         self.state['caindo'] = True
         self.state['pulando'] = False
 
+        if self.rect.y < 20:
+            self.rect.y = 20 + self.jump
+
         if self.rect.collidelist(self.lista_blocos) != -1:
             self.rect.y -= self.GRAVIDADE
             self.state['caindo'] = False

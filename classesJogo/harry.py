@@ -10,6 +10,7 @@ class Harry(pygame.sprite.Sprite):
         self.rect.x = 20
         self.rect.y = 600
         self.GRAVIDADE = 2
+        self.jump = 70
         self.state = {
             'pulando': False,
             'caindo': True
@@ -31,11 +32,14 @@ class Harry(pygame.sprite.Sprite):
 
     def update(self):
         if self.state['pulando'] == True:
-            self.rect.y -= 100
+            self.rect.y -= self.jump
         if self.state['caindo'] == True:
             self.rect.y += self.GRAVIDADE
         self.state['caindo'] = True
         self.state['pulando'] = False
+
+        if self.rect.y < 20:
+            self.rect.y = 20 + self.jump
 
         if self.rect.collidelist(self.lista_blocos) != -1:
             self.rect.y -= self.GRAVIDADE
