@@ -1,7 +1,7 @@
 import pygame
 from .harry import Harry
 from .draco import Draco
-from .objetos import Bloco, Água_Draco, Água_Harry, Água_toxica, Horcrux, Água_toxica_2, Porta
+from .objetos import Bloco, Água_Draco, Água_Harry, Água_toxica, Horcrux, Água_toxica_2, Porta, Diamante
 
 class Tela_jogo2():
     def __init__(self):
@@ -17,11 +17,15 @@ class Tela_jogo2():
         self.lista_agua_harry = []
         self.lista_agua_toxica = []
         self.conta_horcruxes = 0
+        self.conta_diamantes_draco = 0
+        self.conta_diamantes_harry = 0
         self.sprite_personagens = pygame.sprite.Group()
         self.sprite_objetos = pygame.sprite.Group()
         self.sprite_aguas = pygame.sprite.Group()
         self.sprite_horcrux_draco = pygame.sprite.Group()
         self.sprite_horcrux_harry = pygame.sprite.Group()
+        self.sprite_diamante_draco = pygame.sprite.Group()
+        self.sprite_diamante_harry = pygame.sprite.Group()
         self.harry = Harry(self.lista_objetos, 20, 600)
         self.draco = Draco(self.lista_objetos, 1200, 600)
         self.porta = Porta(20, 20, 70, 70)
@@ -62,24 +66,8 @@ class Tela_jogo2():
             chao = Bloco(i * self.tamanho_bloco, 680, self.tamanho_bloco)
             self.lista_objetos.append(chao.rect)
             self.sprite_objetos.add(chao)
-        for i in range(0, 55):
-            plataforma_esquerda = Bloco(i * self.tamanho_bloco, 470, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda.rect)
-            self.sprite_objetos.add(plataforma_esquerda)
-        for i in range(0, 55):
+        for i in range(15, 50):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 450, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda.rect)
-            self.sprite_objetos.add(plataforma_esquerda)
-        for i in range(0, 5):
-            plataforma_esquerda = Bloco(i * self.tamanho_bloco, 390, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda.rect)
-            self.sprite_objetos.add(plataforma_esquerda)
-        for i in range(0, 5):
-            plataforma_esquerda = Bloco(i * self.tamanho_bloco, 430, self.tamanho_bloco)
-            self.lista_objetos.append(plataforma_esquerda.rect)
-            self.sprite_objetos.add(plataforma_esquerda)
-        for i in range(0, 5):
-            plataforma_esquerda = Bloco(i * self.tamanho_bloco, 410, self.tamanho_bloco)
             self.lista_objetos.append(plataforma_esquerda.rect)
             self.sprite_objetos.add(plataforma_esquerda)
         for i in range(0, 47):
@@ -97,7 +85,15 @@ class Tela_jogo2():
 
         # plataforma das horcruxes
         for i in range(15, 25):
+            plataforma_esquerda = Bloco(i * self.tamanho_bloco, 590, self.tamanho_bloco)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
+        for i in range(15, 25):
             plataforma_esquerda = Bloco(i * self.tamanho_bloco, 570, self.tamanho_bloco)
+            self.lista_objetos.append(plataforma_esquerda.rect)
+            self.sprite_objetos.add(plataforma_esquerda)
+        for i in range(31, 41):
+            plataforma_esquerda = Bloco(i * self.tamanho_bloco, 590, self.tamanho_bloco)
             self.lista_objetos.append(plataforma_esquerda.rect)
             self.sprite_objetos.add(plataforma_esquerda)
         for i in range(31, 41):
@@ -110,6 +106,10 @@ class Tela_jogo2():
             self.sprite_objetos.add(plataforma_esquerda)
         for i in range(58, 64):
             plataforma_direita = Bloco(i * self.tamanho_bloco, 480, self.tamanho_bloco)
+            self.lista_objetos.append(plataforma_direita.rect)
+            self.sprite_objetos.add(plataforma_direita)
+        for i in range(58, 64):
+            plataforma_direita = Bloco(i * self.tamanho_bloco, 580, self.tamanho_bloco)
             self.lista_objetos.append(plataforma_direita.rect)
             self.sprite_objetos.add(plataforma_direita)
         for i in range(14, 34):
@@ -130,7 +130,11 @@ class Tela_jogo2():
             self.sprite_objetos.add(plataforma_esquerda)
 
         # adiciona as aguas na tela
-        agua_draco2 = Água_Draco(5 * self.largura_agua, 450, self.largura_agua, self.altura_agua)
+        agua_draco = Água_Draco(2 * self.largura_agua, 680, self.largura_agua, self.altura_agua)
+        self.lista_agua_draco.append(agua_draco.rect)
+        self.sprite_aguas.add(agua_draco)
+
+        agua_draco2 = Água_Draco(4 * self.largura_agua, 570, self.largura_agua, self.altura_agua)
         self.lista_agua_draco.append(agua_draco2.rect)
         self.sprite_aguas.add(agua_draco2)
 
@@ -138,17 +142,21 @@ class Tela_jogo2():
         self.lista_agua_draco.append(agua_draco3.rect)
         self.sprite_aguas.add(agua_draco3)
 
-        agua_harry2 = Água_Harry(2 * self.largura_agua, 170, self.largura_agua, self.altura_agua)
+        agua_harry1 = Água_Harry(4 * self.largura_agua, 680, self.largura_agua, self.altura_agua)
+        self.lista_agua_harry.append(agua_harry1.rect)
+        self.sprite_aguas.add(agua_harry1)
+
+        agua_harry2 = Água_Harry(2 * self.largura_agua, 570, self.largura_agua, self.altura_agua)
         self.lista_agua_harry.append(agua_harry2.rect)
         self.sprite_aguas.add(agua_harry2)
 
-        agua_toxica = Água_toxica(320, 450, 320, self.altura_agua)
-        self.lista_agua_toxica.append(agua_toxica.rect)
-        self.sprite_aguas.add(agua_toxica)
+        # agua_toxica = Água_toxica(320, 450, 320, self.altura_agua)
+        # self.lista_agua_toxica.append(agua_toxica.rect)
+        # self.sprite_aguas.add(agua_toxica)
 
-        agua_toxica2 = Água_toxica(500, 680, 320, self.altura_agua)
-        self.lista_agua_toxica.append(agua_toxica2.rect)
-        self.sprite_aguas.add(agua_toxica2)
+        # agua_toxica2 = Água_toxica(500, 680, 320, self.altura_agua)
+        # self.lista_agua_toxica.append(agua_toxica2.rect)
+        # self.sprite_aguas.add(agua_toxica2)
 
         agua_toxica_menor = Água_toxica_2(20, 170, 120, self.altura_agua)
         self.lista_agua_toxica.append(agua_toxica_menor.rect)
@@ -158,11 +166,18 @@ class Tela_jogo2():
         taca = Horcrux(700, 500, 40, 40, 'imagens/taca.png')
         self.sprite_horcrux_draco.add(taca)
 
-        diadema = Horcrux(900, 500, 40, 40, 'imagens/diadema.jpg')
+        diadema = Horcrux(1190, 420, 40, 40, 'imagens/diadema.jpg')
         self.sprite_horcrux_harry.add(diadema)
 
         nagini = Horcrux(1000, 500, 40, 40, 'imagens/nagini.jpg')
         self.sprite_horcrux_harry.add(nagini)
+
+        # adiciona os diamantes na tela 
+        diamante_dm1 = Diamante(380, 640, 25, 25, 'imagens/diamante_draco.png')
+        self.sprite_diamante_draco.add(diamante_dm1)
+
+        diamante_hp1 = Diamante(700, 640, 25, 25, 'imagens/diamante_harry.png')
+        self.sprite_diamante_harry.add(diamante_hp1)
         
     def checa_agua(self):
         for agua_harry in self.lista_agua_harry:
@@ -192,6 +207,17 @@ class Tela_jogo2():
         if self.conta_horcruxes == 3:
             if self.draco.rect.colliderect(self.porta.rect) and self.harry.rect.colliderect(self.porta.rect):
                 return -1
+    
+    def checa_diamantes(self):
+        for diamante_draco in self.sprite_diamante_draco:
+            if self.draco.rect.colliderect(diamante_draco):
+                self.conta_diamantes_draco += 1
+                diamante_draco.kill()
+
+        for diamante_harry in self.sprite_diamante_harry:
+            if self.harry.rect.colliderect(diamante_harry):
+                self.conta_diamantes_harry += 1
+                diamante_harry.kill()
         
     def desenha(self, window):
         # desenha tudo na tela 
@@ -205,11 +231,14 @@ class Tela_jogo2():
         self.sprite_aguas.draw(window)
         self.sprite_horcrux_draco.draw(window)
         self.sprite_horcrux_harry.draw(window)
+        self.sprite_diamante_draco.draw(window)
+        self.sprite_diamante_harry.draw(window)
 
     def atualiza_estado(self):
         self.checa_agua()
         self.checa_horcruxes()
         self.checa_porta()
+        self.checa_diamantes()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:

@@ -55,4 +55,10 @@ class Porta(Objetos):
     def __init__(self, x, y, largura, altura):
         super().__init__(x, y, largura, altura)
         porta = pygame.transform.scale(pygame.image.load('imagens/porta.png'), (70, 70))
-        self.image.blit(porta, (0, 0)) 
+        self.image.blit(porta, (0, 0))
+
+class Diamante(Objetos):
+    def __init__(self, x, y, largura, altura, imagem):
+        super().__init__(x, y, largura, altura) 
+        diamante = pygame.transform.scale(pygame.image.load(imagem), (25, 25))
+        self.image.blit(diamante, (0, 0)) 
