@@ -4,6 +4,7 @@ from .tela_harry import Tela_harry
 from .tela_instrucoes import Tela_instrucoes
 from .tela_jogo import Tela_jogo
 from .tela_jogo2 import Tela_jogo2
+from .tela_gameover import Tela_gameover
 import pygame
 
 class Gerenciador_Telas():
@@ -31,6 +32,8 @@ class Gerenciador_Telas():
             self.tela = Tela_instrucoes()
         if proxima_tela == 'TELA_JOGO2':
             self.tela = Tela_jogo2()
+        if proxima_tela == 'TELA_GAMEOVER':
+            self.tela = Tela_gameover()
         return True
 
     def desenha(self):

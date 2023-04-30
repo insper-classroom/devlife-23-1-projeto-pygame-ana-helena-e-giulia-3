@@ -255,7 +255,7 @@ class Tela_jogo2():
             if event.type == pygame.QUIT:
                 return -1
             if self.checa_agua() == -1: #tem que retornar a tela de game over
-                return -1
+                return 'TELA_GAMEOVER'
             if self.checa_porta() == -1: #tem que retornar a tela de ganhou
                 return -1
             elif event.type == pygame.KEYDOWN:

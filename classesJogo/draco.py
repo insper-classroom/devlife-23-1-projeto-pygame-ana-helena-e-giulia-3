@@ -10,25 +10,25 @@ class Draco(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.GRAVIDADE = 2
-        self.jump = 70
+        self.jump = 80
         self.state = {
             'pulando': False,
             'caindo': True
         }
 
     def movimenta_esquerda(self):
-        self.rect.x -= 4
+        self.rect.x -= 1
 
          # colisao com parede esquerda
         if self.rect.collidelist(self.lista_blocos) != -1:
-            self.rect.x += 4
+            self.rect.x += 1
     
     def movimenta_direita(self):
-        self.rect.x += 4
+        self.rect.x += 1
 
         # colisao com parede direita
         if self.rect.collidelist(self.lista_blocos) != -1:
-            self.rect.x -= 4
+            self.rect.x -= 1
 
     def update(self):
         if self.state['pulando'] == True:
