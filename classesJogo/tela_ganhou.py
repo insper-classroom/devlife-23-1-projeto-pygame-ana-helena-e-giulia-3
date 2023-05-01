@@ -14,7 +14,6 @@ class Tela_ganhou():
         self.menu_rect = self.menu.get_rect(center=(1280/2, 660))
 
     def desenha(self, window): 
-
         window.blit(self.fundo, (0, 0))
         window.blit(self.vitoria, (450, 130))
         

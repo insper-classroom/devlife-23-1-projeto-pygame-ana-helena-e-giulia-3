@@ -149,7 +149,7 @@ class Tela_jogo():
             self.lista_objetos.append(plataforma_esquerda.rect)
             self.sprite_objetos.add(plataforma_esquerda)
 
-        # adiciona as aguas na tela
+        # adiciona as águas na tela
         agua_draco = Água_Draco(2 * self.largura_agua, 680, self.largura_agua, self.altura_agua)
         self.lista_agua_draco.append(agua_draco.rect)
         self.sprite_aguas.add(agua_draco)
@@ -189,6 +189,7 @@ class Tela_jogo():
         self.sprite_horcrux_harry.add(anel)
         
     def checa_agua(self):
+        # verifica se colidiu com qualquer água do jogo
         for agua_harry in self.lista_agua_harry:
             if self.draco.rect.colliderect(agua_harry):
                 return -1
@@ -202,6 +203,7 @@ class Tela_jogo():
                 return -1
             
     def checa_horcruxes(self):
+        # permite pegar as horcruxes da tela
         for horcrux_draco in self.sprite_horcrux_draco:
             if self.draco.rect.colliderect(horcrux_draco):
                 self.conta_horcruxes += 1
@@ -213,6 +215,7 @@ class Tela_jogo():
                 horcrux_harry.kill()
 
     def checa_porta(self):
+        # verifica se colidiu com a porta
         if self.conta_horcruxes == 3:
             if self.draco.rect.colliderect(self.porta.rect) and self.harry.rect.colliderect(self.porta.rect):
                 return -1
@@ -231,6 +234,7 @@ class Tela_jogo():
         self.sprite_horcrux_harry.draw(window)
 
     def atualiza_estado(self):
+        # retorna qual tela deve ser desenhada em seguida e permite o jogador se mover 
         self.checa_agua()
         self.checa_horcruxes()
         self.checa_porta()
@@ -253,9 +257,9 @@ class Tela_jogo():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
-            if self.checa_agua() == -1: #tem que retornar a tela de game over
+            if self.checa_agua() == -1:
                 return 'TELA_GAMEOVER'
-            if self.checa_porta() == -1: #tem que retornar a tela de ganhou e dps retornar a tela da proxima fase
+            if self.checa_porta() == -1: 
                 return 'TELA_JOGO2'
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:

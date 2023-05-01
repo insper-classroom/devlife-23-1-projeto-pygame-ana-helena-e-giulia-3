@@ -1,4 +1,4 @@
-# Classe que irá gerenciar as telas do jogo
+# classe que irá gerenciar as telas do jogo
 from .tela_inicial import Tela_inicial
 from .tela_harry import Tela_harry
 from .tela_instrucoes import Tela_instrucoes
@@ -15,6 +15,7 @@ class Gerenciador_Telas():
         self.tela = Tela_inicial()
     
     def game_loop(self):
+        # loop que desenha cada tela enquanto o jogo for True
         jogo = True
 
         while jogo:
@@ -22,7 +23,7 @@ class Gerenciador_Telas():
             self.desenha()
 
     def tela_update(self):
-        # o que vai atualizar o 'self.tela'
+        # updata a tela que será desenhada
         proxima_tela = self.tela.atualiza_estado()
         if proxima_tela == -1:
             return False
