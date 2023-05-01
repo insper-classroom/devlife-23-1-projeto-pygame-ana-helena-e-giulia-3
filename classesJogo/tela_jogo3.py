@@ -39,6 +39,7 @@ class Tela_jogo3():
                 self.lista_imagem_fundo.append(posicao)
     
     def gera_terreno(self):
+        # desenha as bordas
         for i in range(64):
             chao = Bloco(i * self.tamanho_bloco, 700, self.tamanho_bloco)
             self.lista_objetos.append(chao.rect)
@@ -55,7 +56,6 @@ class Tela_jogo3():
             parede_direita = Bloco(1260, i * self.tamanho_bloco, self.tamanho_bloco)
             self.lista_objetos.append(parede_direita.rect)
             self.sprite_objetos.add(parede_direita)
-
 
         # desenha dentro do mapa
         for i in range(64):
@@ -151,8 +151,7 @@ class Tela_jogo3():
             self.lista_objetos.append(chao.rect)
             self.sprite_objetos.add(chao)
 
-
-        #cria agua
+        # adiciona as águas na tela
         agua_draco = Água_Draco(1.5 * self.largura_agua, 120, self.largura_agua, self.altura_agua)
         self.lista_agua_draco.append(agua_draco.rect)
         self.sprite_aguas.add(agua_draco)
@@ -169,8 +168,7 @@ class Tela_jogo3():
         self.lista_agua_toxica.append(agua_toxica2.rect)
         self.sprite_aguas.add(agua_toxica2)
 
-
-        #cria diamantes
+        # adiciona os diamantes na tela 
         diamante_dm1 = Diamante(910, 370, 25, 25, 'imagens/diamante_draco.png')
         self.sprite_diamante_draco.add(diamante_dm1)
 
@@ -195,8 +193,8 @@ class Tela_jogo3():
         diamante_hp4 = Diamante(1000, 550, 25, 25, 'imagens/diamante_harry.png')
         self.sprite_diamante_harry.add(diamante_hp4)
 
-
     def checa_agua(self):
+        # verifica se colidiu com qualquer água do jogo
         for agua_harry in self.lista_agua_harry:
             if self.draco.rect.colliderect(agua_harry):
                 return 'draco_dead'
@@ -213,6 +211,7 @@ class Tela_jogo3():
                 return 'draco_deaddead'
     
     def checa_diamantes(self):
+        # permite pegar os diamantes da tela 
         for diamante_draco in self.sprite_diamante_draco:
             if self.draco.rect.colliderect(diamante_draco):
                 self.conta_diamantes += 1
@@ -225,7 +224,6 @@ class Tela_jogo3():
                 self.conta_diamantes_harry += 1
                 diamante_harry.kill()
 
-        
     def desenha(self, window):
         # desenha tudo na tela 
         window.fill((0, 0, 0))
@@ -239,8 +237,8 @@ class Tela_jogo3():
         self.sprite_diamante_draco.draw(window)
         self.sprite_diamante_harry.draw(window)
 
-
     def atualiza_estado(self):
+        # retorna qual tela deve ser desenhada em seguida e permite o jogador se mover 
         self.checa_agua()
         self.checa_diamantes()
         

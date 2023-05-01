@@ -17,7 +17,6 @@ class Tela_harry():
         self.draco = pygame.transform.scale(draco_img, (700, 700))
 
     def desenha(self, window):
-
         window.blit(self.fundo, (0, 0))
 
         window.blit(self.prosseguir, self.prosseguir_rect)

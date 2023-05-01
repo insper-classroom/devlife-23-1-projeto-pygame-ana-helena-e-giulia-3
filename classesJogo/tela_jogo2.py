@@ -135,7 +135,7 @@ class Tela_jogo2():
             self.lista_objetos.append(plataforma_esquerda.rect)
             self.sprite_objetos.add(plataforma_esquerda)
 
-        # adiciona as aguas na tela
+        # adiciona as águas na tela
         agua_draco = Água_Draco(2 * self.largura_agua, 680, self.largura_agua, self.altura_agua)
         self.lista_agua_draco.append(agua_draco.rect)
         self.sprite_aguas.add(agua_draco)
@@ -181,6 +181,7 @@ class Tela_jogo2():
         self.sprite_diamante_harry.add(diamante_hp2)
         
     def checa_agua(self):
+        # verifica se colidiu com qualquer água do jogo
         for agua_harry in self.lista_agua_harry:
             if self.draco.rect.colliderect(agua_harry):
                 return -1
@@ -194,6 +195,7 @@ class Tela_jogo2():
                 return -1
             
     def checa_horcruxes(self):
+        # permite pegar as horcruxes da tela
         for horcrux_draco in self.sprite_horcrux_draco:
             if self.draco.rect.colliderect(horcrux_draco):
                 self.conta_horcruxes += 1
@@ -211,6 +213,7 @@ class Tela_jogo2():
                     nagini.kill()
 
     def checa_diamantes(self):
+        # permite pegar os diamantes da tela
         for diamante_draco in self.sprite_diamante_draco:
             if self.draco.rect.colliderect(diamante_draco):
                 self.conta_diamantes += 1
@@ -224,6 +227,7 @@ class Tela_jogo2():
                 diamante_harry.kill()
 
     def checa_porta(self):
+        # verifica se colidiu com a porta
         if self.conta_diamantes == 3 and self.conta_horcruxes == 3:
             if self.draco.rect.colliderect(self.porta.rect) and self.harry.rect.colliderect(self.porta.rect):
                 return -1
@@ -245,6 +249,7 @@ class Tela_jogo2():
         self.sprite_nagini.draw(window)
 
     def atualiza_estado(self):
+        # retorna qual tela deve ser desenhada em seguida e permite o jogador se mover 
         self.checa_agua()
         self.checa_diamantes()
         self.checa_horcruxes()
@@ -268,9 +273,9 @@ class Tela_jogo2():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
-            if self.checa_agua() == -1: #tem que retornar a tela de game over
+            if self.checa_agua() == -1: 
                 return 'TELA_GAMEOVER'
-            if self.checa_porta() == -1: #tem que retornar a tela de ganhou
+            if self.checa_porta() == -1:
                 return 'TELA_JOGO3'
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:

@@ -5,7 +5,7 @@ class Harry(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.transform.scale(pygame.image.load('imagens/harry_lado_direito.png'), (50, 60))
         self.rect = self.image.get_rect()
-        # posicao inicial do boneco
+        # posição inicial do harry
         self.lista_blocos = lista_blocos
         self.rect.x = x
         self.rect.y = y
@@ -19,18 +19,19 @@ class Harry(pygame.sprite.Sprite):
     def movimenta_esquerda(self):
         self.rect.x -= 4
 
-         # colisao com parede esquerda
+         # verifica colisão com parede esquerda
         if self.rect.collidelist(self.lista_blocos) != -1:
             self.rect.x += 4
     
     def movimenta_direita(self):
         self.rect.x += 4
 
-        # colisao com parede direita
+        # verifica colisão com parede direita
         if self.rect.collidelist(self.lista_blocos) != -1:
             self.rect.x -= 4
 
     def update(self):
+        # verifica se o harry está pulando e o limita dentro da tela 
         if self.state['pulando'] == True:
             self.rect.y -= self.jump
         if self.state['caindo'] == True:
