@@ -160,18 +160,6 @@ class Tela_jogo2():
         self.lista_agua_harry.append(agua_harry3.rect)
         self.sprite_aguas.add(agua_harry3)
 
-        # agua_toxica = Água_toxica(320, 450, 320, self.altura_agua)
-        # self.lista_agua_toxica.append(agua_toxica.rect)
-        # self.sprite_aguas.add(agua_toxica)
-
-        # agua_toxica2 = Água_toxica(500, 680, 320, self.altura_agua)
-        # self.lista_agua_toxica.append(agua_toxica2.rect)
-        # self.sprite_aguas.add(agua_toxica2)
-
-        # agua_toxica_menor = Água_toxica_2(20, 170, 120, self.altura_agua)
-        # self.lista_agua_toxica.append(agua_toxica_menor.rect)
-        # self.sprite_aguas.add(agua_toxica_menor)
-
         # adiciona as horcruxes na tela
         taca = Horcrux(700, 380, 40, 40, 'imagens/taca.png')
         self.sprite_horcrux_draco.add(taca)
@@ -279,7 +267,7 @@ class Tela_jogo2():
             if self.checa_agua() == -1: #tem que retornar a tela de game over
                 return 'TELA_GAMEOVER'
             if self.checa_porta() == -1: #tem que retornar a tela de ganhou
-                return -1
+                return 'TELA_JOGO3'
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
                     self.draco.state['pulando'] = True
