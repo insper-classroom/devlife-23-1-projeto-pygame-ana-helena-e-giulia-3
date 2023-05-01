@@ -31,7 +31,7 @@ class Tela_harry():
         window.blit(t2, (280, 190))
         t3 = self.fonte_texto.render('preso no porão da', True, (0, 0, 0))
         window.blit(t3, (280, 220))
-        t4 = self.fonte_texto.render('Malfoy Manor e', True, (0, 0, 0))
+        t4 = self.fonte_texto.render('Mansão Malfoy e', True, (0, 0, 0))
         window.blit(t4, (280, 250))
         t5 = self.fonte_texto.render('preciso da sua ajuda!', True, (0, 0, 0))
         window.blit(t5, (270, 280))
