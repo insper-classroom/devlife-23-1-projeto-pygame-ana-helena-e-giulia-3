@@ -19,11 +19,11 @@ class Tela_instrucoes():
 
         window.blit(self.instrucoes, (445, 120))
 
-        i1 = self.fonte_texto.render('- Use aswd para movimentar Draco Malfoy', True, (211, 177, 110))
+        i1 = self.fonte_texto.render('- Use awd para movimentar Draco Malfoy', True, (211, 177, 110))
         window.blit(i1, (280, 220))
         i2 = self.fonte_texto.render('- Use as setas para movimentar Harry Potter', True, (211, 177, 110))
         window.blit(i2, (280, 270)) 
-        i3 = self.fonte_texto.render('- Colete as horcrux para ganhar pontos e', True, (211, 177, 110))
+        i3 = self.fonte_texto.render('- Colete as horcrux e diamantes para', True, (211, 177, 110))
         window.blit(i3, (280, 320)) 
         i3c = self.fonte_texto.render('conseguir escapar da sala!', True, (211, 177, 110))
         window.blit(i3c, (295, 355)) 
@@ -35,7 +35,7 @@ class Tela_instrucoes():
         window.blit(i5, (280, 490))
         i5c = self.fonte_texto.render('ele morre, assim como Harry Potter morre', True, (211, 177, 110))
         window.blit(i5c, (295, 525)) 
-        i5cc = self.fonte_texto.render('ao cair no líquido azul', True, (211, 177, 110))
+        i5cc = self.fonte_texto.render('ao cair no líquido verde', True, (211, 177, 110))
         window.blit(i5cc, (295, 560))
 
         window.blit(self.jogar, self.jogar_rect)
