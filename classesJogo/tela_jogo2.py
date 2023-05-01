@@ -30,7 +30,7 @@ class Tela_jogo2():
         self.sprite_nagini = pygame.sprite.Group()
         self.harry = Harry(self.lista_objetos, 20, 600)
         self.draco = Draco(self.lista_objetos, 1200, 600)
-        self.porta = Porta(1170, 100, 70, 70)
+        self.porta = Porta(1170, 110, 70, 70)
         self.sprite_personagens.add(self.harry)
         self.sprite_personagens.add(self.draco)
         self.sprite_objetos.add(self.porta)

@@ -39,9 +39,9 @@ class Gerenciador_Telas():
         if proxima_tela == 'TELA_INICIAL':
             self.tela = Tela_inicial()
         if proxima_tela == 'TELA_JOGO3':
-            self.tela == Tela_jogo3()
+            self.tela = Tela_jogo3()
         if proxima_tela == 'TELA_GANHOU':
-            self.tela == Tela_ganhou()
+            self.tela = Tela_ganhou()
         return True
 
     def desenha(self):
