@@ -12,7 +12,7 @@ import pygame
 class Gerenciador_Telas():
     def __init__(self, window):
         self.window = window
-        self.tela = Tela_instrucoes()
+        self.tela = Tela_inicial()
     
     def game_loop(self):
         jogo = True

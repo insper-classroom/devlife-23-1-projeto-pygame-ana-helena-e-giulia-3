@@ -252,13 +252,17 @@ class Tela_jogo2():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
+            self.harry.image = pygame.transform.scale(pygame.image.load('imagens/harry_lado_esquerdo.png'), (50, 60))
             self.harry.movimenta_esquerda()
         if keys[pygame.K_RIGHT]:
+            self.harry.image = pygame.transform.scale(pygame.image.load('imagens/harry_lado_direito.png'), (50, 60))
             self.harry.movimenta_direita()
         
         if keys[pygame.K_a]:
+            self.draco.image = pygame.transform.scale(pygame.image.load('imagens/draco_lado_esquerdo.png'), (50, 60))
             self.draco.movimenta_esquerda()
         if keys[pygame.K_d]:
+            self.draco.image = pygame.transform.scale(pygame.image.load('imagens/draco_lado_direito.png'), (50, 60))
             self.draco.movimenta_direita()
         
         for event in pygame.event.get():

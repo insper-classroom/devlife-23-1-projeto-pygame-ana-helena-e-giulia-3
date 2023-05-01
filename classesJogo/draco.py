@@ -3,7 +3,7 @@ import pygame
 class Draco(pygame.sprite.Sprite):
     def __init__(self, lista_blocos, x, y):
         super().__init__()
-        self.image = pygame.transform.scale(pygame.image.load('imagens/draco_lado.png'), (50, 60))
+        self.image = pygame.transform.scale(pygame.image.load('imagens/draco_lado_direito.png'), (50, 60))
         self.rect = self.image.get_rect()
         # posicao inicial do boneco
         self.lista_blocos = lista_blocos
