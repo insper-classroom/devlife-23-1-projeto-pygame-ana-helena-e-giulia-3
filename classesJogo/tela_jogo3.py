@@ -259,9 +259,9 @@ class Tela_jogo3():
             if event.type == pygame.QUIT:
                 return -1
             elif self.checa_agua() == 'harry_dead' and self.conta_diamantes == 8:
-                return 'TELA_INICIAL'
+                return 'TELA_GANHOU'
             elif self.checa_agua() == 'harry_deaddead' and self.conta_diamantes == 8:
-                return 'TELA_INICIAL'
+                return 'TELA_GANHOU'
             elif self.checa_agua() == 'harry_dead' or self.checa_agua() == 'draco_dead' or self.checa_agua() == 'harry_deaddead' or self.checa_agua() == 'draco_deaddead':
                 return 'TELA_GAMEOVER'
             elif event.type == pygame.KEYDOWN:
