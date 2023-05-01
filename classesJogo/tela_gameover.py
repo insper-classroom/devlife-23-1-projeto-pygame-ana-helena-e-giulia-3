@@ -10,8 +10,10 @@ class Tela_gameover():
 
         self.fonte_texto = pygame.font.Font('docs/font/WizardWorldSimplified-Kxr7.ttf', 25)
 
+        self.menu = self.fonte_texto.render('Voltar para o Menu', True, (174, 139, 71))
+        self.menu_rect = self.menu.get_rect(center=(1280/2, 660))
 
-    def desenha(self, window):
+    def desenha(self, window): 
 
         window.blit(self.fundo, (0, 0))
         window.blit(self.gameover, (350, 130))
@@ -27,8 +29,12 @@ class Tela_gameover():
         dd4 = self.fonte_texto.render('gos correm grande perigo!', True, (211, 177, 110))
         window.blit(dd4, (280, 460))
 
+        window.blit(self.menu, self.menu_rect)
 
     def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if self.menu_rect.collidepoint(event.pos):
+                    return 'TELA_INICIAL'

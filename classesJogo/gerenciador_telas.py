@@ -10,7 +10,7 @@ import pygame
 class Gerenciador_Telas():
     def __init__(self, window):
         self.window = window
-        self.tela = Tela_jogo2()
+        self.tela = Tela_inicial()
     
     def game_loop(self):
         jogo = True
@@ -34,6 +34,8 @@ class Gerenciador_Telas():
             self.tela = Tela_jogo2()
         if proxima_tela == 'TELA_GAMEOVER':
             self.tela = Tela_gameover()
+        if proxima_tela == 'TELA_INICIAL':
+            self.tela = Tela_inicial()
         return True
 
     def desenha(self):
