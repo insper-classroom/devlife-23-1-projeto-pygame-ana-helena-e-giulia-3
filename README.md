@@ -17,6 +17,7 @@ Para jogar, é necessário ter o Python 3 instalado na máquina. Além disso, é
 Após instalar a biblioteca, clone este repositório e execute o arquivo main.py. O jogo será aberto em uma janela de terminal e pode ser jogado com as seguintes teclas:
 
 Movimento Harry: teclas de seta
+
 Movimento Draco: teclas "awd"
 
 **Informações Adicionanis**
