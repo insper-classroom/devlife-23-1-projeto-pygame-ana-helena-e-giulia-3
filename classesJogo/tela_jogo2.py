@@ -206,11 +206,10 @@ class Tela_jogo2():
                 self.conta_horcruxes += 1  
                 horcrux_harry.kill()
 
-        if self.conta_diamantes_harry == 2:
-            for nagini in self.sprite_nagini:
-                if self.harry.rect.colliderect(nagini):
-                    self.conta_horcruxes += 1
-                    nagini.kill()
+        for nagini in self.sprite_nagini:
+            if self.harry.rect.colliderect(nagini):
+                self.conta_horcruxes += 1
+                nagini.kill()
 
     def checa_diamantes(self):
         # permite pegar os diamantes da tela
