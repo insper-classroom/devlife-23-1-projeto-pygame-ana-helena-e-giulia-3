@@ -238,7 +238,7 @@ class Tela_jogo():
         self.checa_agua()
         self.checa_horcruxes()
         self.checa_porta()
-
+    
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.harry.image = pygame.transform.scale(pygame.image.load('imagens/harry_lado_esquerdo.png'), (50, 60))
@@ -253,14 +253,15 @@ class Tela_jogo():
         if keys[pygame.K_d]:
             self.draco.image = pygame.transform.scale(pygame.image.load('imagens/draco_lado_direito.png'), (50, 60))
             self.draco.movimenta_direita()
+            
+        if self.checa_agua() == -1:
+            return 'TELA_GAMEOVER'
+        if self.checa_porta() == -1: 
+            return 'TELA_JOGO2'
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
-            if self.checa_agua() == -1:
-                return 'TELA_GAMEOVER'
-            if self.checa_porta() == -1: 
-                return 'TELA_JOGO2'
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
                     self.draco.state['pulando'] = True

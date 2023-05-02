@@ -257,15 +257,16 @@ class Tela_jogo3():
             self.draco.image = pygame.transform.scale(pygame.image.load('imagens/draco_lado_direito.png'), (50, 60))
             self.draco.movimenta_direita()
         
+        if self.checa_agua() == 'harry_dead' and self.conta_diamantes == 8:
+            return 'TELA_GANHOU'
+        if self.checa_agua() == 'harry_deaddead' and self.conta_diamantes == 8:
+            return 'TELA_GANHOU'
+        if self.checa_agua() == 'harry_dead' or self.checa_agua() == 'draco_dead' or self.checa_agua() == 'harry_deaddead' or self.checa_agua() == 'draco_deaddead':
+            return 'TELA_GAMEOVER'
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
-            if self.checa_agua() == 'harry_dead' and self.conta_diamantes == 8:
-                return 'TELA_GANHOU'
-            if self.checa_agua() == 'harry_deaddead' and self.conta_diamantes == 8:
-                return 'TELA_GANHOU'
-            if self.checa_agua() == 'harry_dead' or self.checa_agua() == 'draco_dead' or self.checa_agua() == 'harry_deaddead' or self.checa_agua() == 'draco_deaddead':
-                return 'TELA_GAMEOVER'
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
                     self.draco.state['pulando'] = True

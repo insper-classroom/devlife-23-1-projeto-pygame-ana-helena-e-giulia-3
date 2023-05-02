@@ -270,13 +270,14 @@ class Tela_jogo2():
             self.draco.image = pygame.transform.scale(pygame.image.load('imagens/draco_lado_direito.png'), (50, 60))
             self.draco.movimenta_direita()
         
+        if self.checa_agua() == -1: 
+            return 'TELA_GAMEOVER'
+        if self.checa_porta() == -1:
+            return 'TELA_JOGO3'
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
-            if self.checa_agua() == -1: 
-                return 'TELA_GAMEOVER'
-            if self.checa_porta() == -1:
-                return 'TELA_JOGO3'
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
                     self.draco.state['pulando'] = True
