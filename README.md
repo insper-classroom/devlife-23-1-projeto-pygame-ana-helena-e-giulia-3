@@ -25,6 +25,10 @@ Jogo e site desenvolvidos por Ana Helena Caiafa e Giulia Gomes Vallente.
 
 Todas as imagens dos personagens, assim como todos os objetos do jogo, foram desenhados por nós. 
 
+**Commit dia 24/04**
+
+Commit versão 1 do site e jogo: 'atualização do site e limpa no código'.
+
 **Referências**
 
 Imagem de fundo da tela de game over: https://static.wikia.nocookie.net/harrypotter/images/9/99/Hogwarts_Post-Battle.jpg/revision/latest?cb=20100703135011
