@@ -29,6 +29,6 @@ Todas as imagens dos personagens, assim como todos os objetos do jogo, foram des
 
 Imagem de fundo da tela de game over: https://static.wikia.nocookie.net/harrypotter/images/9/99/Hogwarts_Post-Battle.jpg/revision/latest?cb=20100703135011
 
-Imagem de fundo da tela de ganhar: https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/06/19745_10C65168E8A74775.jpg?w=876&h=484&crop=1
+Imagem de fundo da tela de vitória: https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/06/19745_10C65168E8A74775.jpg?w=876&h=484&crop=1
 
 Imagem de fundo tela inicial: https://images.squarespace-cdn.com/content/v1/58b866f417bffc4dc469acab/1571250576237-FWSV4Y04T5DT2VAD4QO1/13.jpg?format=1500w

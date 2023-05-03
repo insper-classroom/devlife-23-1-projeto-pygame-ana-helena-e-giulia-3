@@ -4,7 +4,35 @@ from .draco import Draco
 from .objetos import Bloco, Água_Draco, Água_Harry, Água_toxica, Horcrux, Água_toxica_2, Porta
 
 class Tela_jogo():
+    """
+    Representa a tela da primeira fase do jogo e controla sua renderização, bem como as interações dos personagens e objetos.
+    """
     def __init__(self):
+        """
+        Inicializa os atributos da instância da classe Tela_jogo.
+        
+        Atributos:
+            largura_imagem_fundo (int): a largura da imagem de fundo.
+            altura_imagem_fundo (int): a altura da imagem de fundo.
+            fundo (Surface): a imagem de fundo do jogo.
+            lista_imagem_fundo (list): uma lista vazia para armazenar imagens de fundo adicionais.
+            tamanho_bloco (int): o tamanho de cada bloco do terreno.
+            largura_agua (int): a largura dos blocos de água.
+            altura_agua (int): a altura dos blocos de água.
+            lista_objetos (list): uma lista vazia para armazenar objetos do jogo.
+            lista_agua_draco (list): uma lista vazia para armazenar blocos de água da área do Draco.
+            lista_agua_harry (list): uma lista vazia para armazenar blocos de água da área do Harry.
+            lista_agua_toxica (list): uma lista vazia para armazenar blocos de água tóxica.
+            conta_horcruxes (int): um contador para o número de Horcruxes encontradas.
+            sprite_personagens (Group): um grupo de sprites dos personagens do jogo.
+            sprite_objetos (Group): um grupo de sprites dos objetos do jogo.
+            sprite_aguas (Group): um grupo de sprites dos blocos de água do jogo.
+            sprite_horcrux_draco (Group): um grupo de sprites das Horcruxes encontradas pelo Draco.
+            sprite_horcrux_harry (Group): um grupo de sprites das Horcruxes encontradas pelo Harry.
+            harry (Harry): o objeto da classe Harry.
+            draco (Draco): o objeto da classe Draco.
+            porta (Porta): o objeto da classe Porta.
+        """
         self.largura_imagem_fundo = 144
         self.altura_imagem_fundo = 144
         self.fundo = pygame.transform.scale(pygame.image.load('imagens/fundo.jpg'), (self.largura_imagem_fundo, self.altura_imagem_fundo)).convert_alpha()
@@ -32,6 +60,9 @@ class Tela_jogo():
         self.gera_terreno()
 
     def gera_fundo(self):
+        """
+        Método que gera a imagem de fundo da tela do jogo. 
+        """
         # gera a tela de fundo 
         for i in range(1280 // self.largura_imagem_fundo + 1):
             for j in range(720 // self.altura_imagem_fundo + 1):
@@ -39,6 +70,9 @@ class Tela_jogo():
                 self.lista_imagem_fundo.append(posicao)
     
     def gera_terreno(self):
+        """
+        Método que gera as plataformas e as bordas do jogo, assim como os objetos nele existentes. 
+        """
         # desenha as bordas
         for i in range(64):
             chao = Bloco(i * self.tamanho_bloco, 700, self.tamanho_bloco)
@@ -189,6 +223,13 @@ class Tela_jogo():
         self.sprite_horcrux_harry.add(anel)
         
     def checa_agua(self):
+        """
+        Método que verifica a colisão de algum personagem do jogo com as águas do mesmo. 
+        Caso Harry caia na água verde, ou Draco na água vermelha ou qualquer um dos dois na água preta, a função retorna -1.
+
+        Returns: 
+            -1 quando há a colisão com a água. 
+        """
         # verifica se colidiu com qualquer água do jogo
         for agua_harry in self.lista_agua_harry:
             if self.draco.rect.colliderect(agua_harry):
@@ -203,6 +244,10 @@ class Tela_jogo():
                 return -1
             
     def checa_horcruxes(self):
+        """
+        Método que verifica a colisão de algum personagem do jogo com as horcruxes, para assim poder pegá-las. 
+        Harry e Draco tem as suas respectivas horcruxes.
+        """
         # permite pegar as horcruxes da tela
         for horcrux_draco in self.sprite_horcrux_draco:
             if self.draco.rect.colliderect(horcrux_draco):
@@ -215,12 +260,22 @@ class Tela_jogo():
                 horcrux_harry.kill()
 
     def checa_porta(self):
+        """
+        Método que verifica a colisão dos personagens com a porta de saída da sala. 
+        Só é ativado, caso os personagens peguem todas as horcruxes da tela. 
+
+        Returns: 
+            -1 quando há a colisão com a porta. 
+        """
         # verifica se colidiu com a porta
         if self.conta_horcruxes == 3:
             if self.draco.rect.colliderect(self.porta.rect) and self.harry.rect.colliderect(self.porta.rect):
                 return -1
         
     def desenha(self, window):
+        """
+        Método que chama as funções de desenhar das sprites, assim como desenha tudo que precisa na tela. 
+        """
         # desenha tudo na tela 
         window.fill((0, 0, 0))
 
@@ -234,6 +289,17 @@ class Tela_jogo():
         self.sprite_horcrux_harry.draw(window)
 
     def atualiza_estado(self):
+        """
+        Método que atualiza o estado do jogo e retorna a próxima tela que deve ser desenhada.
+        Checa se o jogador caiu na água, se coletou todas as Horcruxes e se chegou à porta de saída.
+        Permite que o jogador se mova com as teclas de seta para o Harry e 'a' e 'd' para Draco.
+        Ao pressionar 'w' ou 'up', o jogador salta com Draco e Harry, respectivamente.
+
+        Returns:
+            'TELA_GAMEOVER' se a função checa_agua retornar -1
+            'TELA_JOGO2' se a função checa_porta retornar -1
+            True caso o contrário, mantendo o jogo rodando dentro do loop principal 
+        """
         # retorna qual tela deve ser desenhada em seguida e permite o jogador se mover 
         self.checa_agua()
         self.checa_horcruxes()

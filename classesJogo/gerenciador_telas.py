@@ -10,11 +10,17 @@ from .tela_ganhou import Tela_ganhou
 import pygame
 
 class Gerenciador_Telas():
+    """
+    Classe utilizada para gerenciar qual tela deverá ser desenhada em seguida. 
+    """
     def __init__(self, window):
         self.window = window
         self.tela = Tela_inicial()
     
     def game_loop(self):
+        """
+        Método que contém o loop principal do jogo.
+        """
         # loop que desenha cada tela enquanto o jogo for True
         jogo = True
 
@@ -23,6 +29,9 @@ class Gerenciador_Telas():
             self.desenha()
 
     def tela_update(self):
+        """
+        Método que atualiza a tela do jogo de acordo com o estado atual.
+        """
         # updata a tela que será desenhada
         proxima_tela = self.tela.atualiza_estado()
         if proxima_tela == -1:
@@ -46,6 +55,9 @@ class Gerenciador_Telas():
         return True
 
     def desenha(self):
+        """
+        Método que desenha a tela do jogo.
+        """
         # irá desenhar a tela settada como 'self.tela'
         self.tela.desenha(self.window)
 

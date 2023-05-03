@@ -1,11 +1,21 @@
 import pygame
 
 class Draco(pygame.sprite.Sprite):
+    """
+    Classe que representa o personagem Draco no jogo.
+    """
     def __init__(self, lista_blocos, x, y):
+        """
+        Construtor da classe Draco.
+
+        Argumentos necessários:
+            lista_blocos (list): lista de objetos que representam os blocos na tela.
+            x (int): posição horizontal inicial do personagem.
+            y (int): posição vertical inicial do personagem.
+        """
         super().__init__()
         self.image = pygame.transform.scale(pygame.image.load('imagens/draco_lado_direito.png'), (50, 60))
         self.rect = self.image.get_rect()
-        # posição inicial do draco
         self.lista_blocos = lista_blocos
         self.rect.x = x
         self.rect.y = y
@@ -17,21 +27,29 @@ class Draco(pygame.sprite.Sprite):
         }
 
     def movimenta_esquerda(self):
-        self.rect.x -= 4
+        """
+        Método que move o personagem para a esquerda na tela.
+        """
+        self.rect.x -= 3
 
          # verifica colisão com parede esquerda
         if self.rect.collidelist(self.lista_blocos) != -1:
-            self.rect.x += 4
+            self.rect.x += 3
     
     def movimenta_direita(self):
-        self.rect.x += 4
+        """
+        Método que move o personagem para a direita na tela.
+        """
+        self.rect.x += 3
 
         # verifica colisão com parede direita
         if self.rect.collidelist(self.lista_blocos) != -1:
-            self.rect.x -= 4
+            self.rect.x -= 3
 
     def update(self):
-        # verifica se o draco está pulando e o limita dentro da tela 
+        """
+        Método que atualiza a posição do personagem na tela.
+        """
         if self.state['pulando'] == True:
             self.rect.y -= self.jump
         if self.state['caindo'] == True:

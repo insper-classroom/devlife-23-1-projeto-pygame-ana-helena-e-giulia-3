@@ -1,7 +1,24 @@
 import pygame
 
 class Tela_ganhou():
+    """
+    Represena a tela de vitória do jogo.
+
+    Atributos:
+        fundo: imagem de fundo da tela de vitória
+        vitoria: objeto que armazena o texto "VITÓRIA!" a ser exibido na tela
+        fonte_texto: objeto que armazena a fonte a ser utilizada para o texto
+        menu: objeto que armazena o texto "Jogar novamente" a ser exibido no botão
+        menu_rect: objeto que armazena as coordenadas do retângulo do botão "Jogar novamente"
+
+    Métodos:
+        desenha: desenha os elementos da tela de vitória na janela do jogo
+        atualiza_estado: atualiza o estado da tela de acordo com os eventos do usuário
+    """
     def __init__(self):
+        """
+        Inicializa a classe com a imagem de fundo, o texto de "vitória" e o botão para jogar novamente.
+        """
         imagem_fundo = pygame.image.load('imagens/fundo_ganhou.jpg')
         self.fundo = pygame.transform.scale(imagem_fundo, (1280, 720))
 
@@ -13,7 +30,13 @@ class Tela_ganhou():
         self.menu = self.fonte_texto.render('Jogar novamente', True, (211, 177, 110))
         self.menu_rect = self.menu.get_rect(center=(1280/2, 660))
 
-    def desenha(self, window): 
+    def desenha(self, window):
+        """
+        Desenha a tela de vitória com os textos e imagens correspondentes.
+
+        Argumentos necessários:
+            window: Objeto pygame da janela onde será desenhada a tela de vitória.
+        """
         window.blit(self.fundo, (0, 0))
         window.blit(self.vitoria, (450, 130))
         
@@ -45,6 +68,13 @@ class Tela_ganhou():
         window.blit(self.menu, self.menu_rect)
 
     def atualiza_estado(self):
+        """
+        Atualiza o estado da tela de vitória de acordo com as interações do usuário com o botão de jogar novamente.
+
+        Returns:
+            Retorna o estado da tela inicial caso o usuário clique no botão de jogar novamente, ou -1 caso clique no
+            botão de fechar a janela.
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1

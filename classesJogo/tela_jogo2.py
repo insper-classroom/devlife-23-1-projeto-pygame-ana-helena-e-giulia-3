@@ -1,10 +1,44 @@
 import pygame
 from .harry import Harry
 from .draco import Draco
-from .objetos import Bloco, Água_Draco, Água_Harry, Água_toxica, Horcrux, Água_toxica_2, Porta, Diamante
+from .objetos import Bloco, Água_Draco, Água_Harry, Horcrux, Porta, Diamante
 
 class Tela_jogo2():
+    """
+    Representa a tela da segunda fase do jogo e controla sua renderização, bem como as interações dos personagens e objetos.
+    """
     def __init__(self):
+        """
+        Inicializa os atributos da instância da classe Tela_jogo2.
+        
+        Atributos:
+            largura_imagem_fundo (int): inteiro que armazena a largura da imagem de fundo
+            altura_imagem_fundo (int): inteiro que armazena a altura da imagem de fundo
+            fundo (Surface): imagem de fundo carregada do arquivo 'imagens/fundo.jpg' e redimensionada para a largura e altura definidas pelos atributos largura_imagem_fundo e altura_imagem_fundo
+            lista_imagem_fundo (list): lista que armazena as imagens de fundo geradas na função gera_fundo()
+            tamanho_bloco (int): inteiro que armazena o tamanho do bloco do terreno
+            largura_agua (int): inteiro que armazena a largura da água na tela
+            altura_agua (int): inteiro que armazena a altura da água na tela
+            lista_objetos (list): lista que armazena os objetos do jogo, como diamantes e horcruxes
+            lista_agua_draco (list): lista que armazena as águas próximas ao Draco
+            lista_agua_harry (list): lista que armazena as águas próximas ao Harry
+            lista_agua_toxica (list): lista que armazena as águas tóxicas
+            conta_horcruxes (int): inteiro que armazena a quantidade de horcruxes coletadas pelos jogadores
+            conta_diamantes_draco (int): inteiro que armazena a quantidade de diamantes coletados pelo Draco
+            conta_diamantes_harry (int): inteiro que armazena a quantidade de diamantes coletados pelo Harry
+            conta_diamantes (int): inteiro que armazena a quantidade total de diamantes coletados pelos jogadores
+            sprite_personagens (Group): sprite group que armazena os personagens do jogo (Harry e Draco)
+            sprite_objetos (Group): sprite group que armazena os objetos do jogo (Porta)
+            sprite_aguas (Group): sprite group que armazena as águas do jogo (água do rio e água tóxica)
+            sprite_horcrux_draco (Group): sprite group que armazena os horcruxes coletados pelo Draco
+            sprite_horcrux_harry (Group): sprite group que armazena os horcruxes coletados pelo Harry
+            sprite_diamante_draco (Group): sprite group que armazena os diamantes coletados pelo Draco
+            sprite_diamante_harry (Group): sprite group que armazena os diamantes coletados pelo Harry
+            sprite_nagini (Group): sprite group que armazena a personagem Nagini
+            harry (Harry): objeto da classe Harry, que representa o personagem Harry na tela
+            draco (Draco): objeto da classe Draco, que representa o personagem Draco na tela
+            porta (Porta): objeto da classe Porta, que representa a porta que leva ao jogo 2 na tela
+        """
         self.largura_imagem_fundo = 144
         self.altura_imagem_fundo = 144
         self.fundo = pygame.transform.scale(pygame.image.load('imagens/fundo.jpg'), (self.largura_imagem_fundo, self.altura_imagem_fundo)).convert_alpha()
@@ -38,6 +72,9 @@ class Tela_jogo2():
         self.gera_terreno()
 
     def gera_fundo(self):
+        """
+        Método que gera a imagem de fundo da tela do jogo. 
+        """
         # gera a tela de fundo 
         for i in range(1280 // self.largura_imagem_fundo + 1):
             for j in range(720 // self.altura_imagem_fundo + 1):
@@ -45,6 +82,9 @@ class Tela_jogo2():
                 self.lista_imagem_fundo.append(posicao)
     
     def gera_terreno(self):
+        """
+        Método que gera as plataformas e as bordas do jogo, assim como os objetos nele existentes. 
+        """
         # desenha as bordas
         for i in range(64):
             chao = Bloco(i * self.tamanho_bloco, 700, self.tamanho_bloco)
@@ -181,6 +221,13 @@ class Tela_jogo2():
         self.sprite_diamante_harry.add(diamante_hp2)
         
     def checa_agua(self):
+        """
+        Método que verifica a colisão de algum personagem do jogo com as águas do mesmo. 
+        Caso Harry caia na água verde, ou Draco na água vermelha ou qualquer um dos dois na água preta, a função retorna -1.
+
+        Returns: 
+            -1 quando há a colisão com a água. 
+        """
         # verifica se colidiu com qualquer água do jogo
         for agua_harry in self.lista_agua_harry:
             if self.draco.rect.colliderect(agua_harry):
@@ -195,6 +242,10 @@ class Tela_jogo2():
                 return -1
             
     def checa_horcruxes(self):
+        """
+        Método que verifica a colisão de algum personagem do jogo com as horcruxes, para assim poder pegá-las. 
+        Harry e Draco tem as suas respectivas horcruxes.
+        """
         # permite pegar as horcruxes da tela
         for horcrux_draco in self.sprite_horcrux_draco:
             if self.draco.rect.colliderect(horcrux_draco):
@@ -213,6 +264,10 @@ class Tela_jogo2():
                     nagini.kill()
 
     def checa_diamantes(self):
+        """
+        Método que verifica a colisão de algum personagem do jogo com os diamantes, para assim poder pegá-los. 
+        Harry e Draco tem os seus respectivos diamantes.
+        """
         # permite pegar os diamantes da tela
         for diamante_draco in self.sprite_diamante_draco:
             if self.draco.rect.colliderect(diamante_draco):
@@ -227,12 +282,22 @@ class Tela_jogo2():
                 diamante_harry.kill()
 
     def checa_porta(self):
+        """
+        Método que verifica a colisão dos personagens com a porta de saída da sala. 
+        Só é ativado, caso os personagens peguem todas as horcruxes da tela. 
+
+        Returns: 
+            -1 quando há a colisão com a porta. 
+        """
         # verifica se colidiu com a porta
         if self.conta_diamantes == 3 and self.conta_horcruxes == 3:
             if self.draco.rect.colliderect(self.porta.rect) and self.harry.rect.colliderect(self.porta.rect):
                 return -1
         
     def desenha(self, window):
+        """
+        Método que chama as funções de desenhar das sprites, assim como desenha tudo que precisa na tela. 
+        """
         # desenha tudo na tela 
         window.fill((0, 0, 0))
 
@@ -249,6 +314,17 @@ class Tela_jogo2():
         self.sprite_nagini.draw(window)
 
     def atualiza_estado(self):
+        """
+        Método que atualiza o estado do jogo e retorna a próxima tela que deve ser desenhada.
+        Checa se o jogador caiu na água, se coletou todas as Horcruxes e todos os diamantes e se chegou à porta de saída.
+        Permite que o jogador se mova com as teclas de seta para o Harry e 'a' e 'd' para Draco.
+        Ao pressionar 'w' ou 'up', o jogador salta com Draco e Harry, respectivamente.
+
+        Returns:
+            'TELA_GAMEOVER' se a função checa_agua retornar -1
+            'TELA_JOGO3' se a função checa_porta retornar -1
+            True caso o contrário, mantendo o jogo rodando dentro do loop principal 
+        """
         # retorna qual tela deve ser desenhada em seguida e permite o jogador se mover 
         self.checa_agua()
         self.checa_diamantes()

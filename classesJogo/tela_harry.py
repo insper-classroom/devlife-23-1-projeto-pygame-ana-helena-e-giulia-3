@@ -1,7 +1,13 @@
 import pygame
 
 class Tela_harry():
+    """
+    Classe responsável por definir a tela de apresentação dos personagens e do jogo. 
+    """
     def __init__(self):
+        """
+        Inicializa a tela de apresentação do jogo com as imagens e textos necessários.
+        """
         fundo_img = pygame.image.load('imagens/fundo_rpg.png')
         self.fundo = pygame.transform.scale(fundo_img, (1280, 720))
 
@@ -17,6 +23,12 @@ class Tela_harry():
         self.draco = pygame.transform.scale(draco_img, (700, 700))
 
     def desenha(self, window):
+        """
+        Desenha a tela de apresentação do jogo na janela especificada.
+
+        Argumentos necessários:
+            window (pygame.Surface): janela onde será desenhada a tela de apresentação.
+        """
         window.blit(self.fundo, (0, 0))
 
         window.blit(self.prosseguir, self.prosseguir_rect)
@@ -47,6 +59,13 @@ class Tela_harry():
         window.blit(t9, (630, 350))
 
     def atualiza_estado(self):
+        """
+        Atualiza o estado da tela a partir dos eventos do Pygame.
+
+        Returns:
+            -1 se o usuário clicar no botão de fechar a janela.
+            'TELA_INSTRUCOES' se o usuário clicar no botão "Prosseguir".
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1

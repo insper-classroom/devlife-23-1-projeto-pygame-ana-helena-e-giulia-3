@@ -1,7 +1,15 @@
 import pygame
 
 class Tela_instrucoes():
+    """
+    Classe responsável por criar a tela de instruções do jogo. 
+    """
     def __init__(self):
+        """
+        Inicializa a tela de instruções do jogo.
+
+        Carrega a imagem do fundo, o título das instruções e o botão "Jogar".
+        """
         self.fundo = pygame.image.load('imagens/fundo_instrucoes.png')
 
         fonte_titulo = pygame.font.Font('docs/font/WizardWorldSimplified-Kxr7.ttf', 70)
@@ -13,6 +21,12 @@ class Tela_instrucoes():
         self.jogar_rect = self.jogar.get_rect(center=(1195, 700))
 
     def desenha(self, window):
+        """
+        Desenha a tela de instruções do jogo na janela especificada.
+
+        Argumentos necessários:
+            window (pygame.Surface): janela onde será desenhada a tela de instruções.
+        """
         window.fill((0, 0, 0))
 
         window.blit(self.fundo, (0, 0))
@@ -41,6 +55,13 @@ class Tela_instrucoes():
         window.blit(self.jogar, self.jogar_rect)
 
     def atualiza_estado(self):
+        """
+        Atualiza o estado da tela a partir dos eventos do Pygame.
+
+        Returns:
+            -1 se o usuário clicar no botão de fechar a janela.
+            'TELA_JOGO' se o usuário clicar no botão "Jogar".
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return -1
